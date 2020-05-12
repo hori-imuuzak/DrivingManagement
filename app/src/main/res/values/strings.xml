@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">サーキット走行マネージャー</string>
+    <string name="app_name_en">Circuit Driving Manager</string>
+    <string name="title_activity_home">ホーム</string>
+    <string name="title_schedule">走行</string>
+    <string name="title_record">レコード</string>
+    <string name="title_setting">設定</string>
+</resources>
