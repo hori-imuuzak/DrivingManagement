@@ -29,4 +29,7 @@
     <string name="name">名前</string>
     <string name="name_kana">名前（カナ）</string>
     <string name="url">URL</string>
+
+    <string name="success_create">作成しました。</string>
+    <string name="error_create">作成に失敗しました。時間をおいて再度お試しください。</string>
 </resources>

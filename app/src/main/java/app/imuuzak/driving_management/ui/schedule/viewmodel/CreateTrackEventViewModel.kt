@@ -1,14 +1,56 @@
 package app.imuuzak.driving_management.ui.schedule.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
+import android.util.Log
+import androidx.lifecycle.*
+import androidx.lifecycle.Observer
+import app.imuuzak.driving_management.domain.model.Circuit
 import app.imuuzak.driving_management.domain.model.value.Time
+import app.imuuzak.driving_management.domain.repository.CircuitRepository
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 
-class CreateTrackEventViewModel : ViewModel() {
+class CreateTrackEventViewModel @Inject constructor(private val circuitRepository: CircuitRepository) :
+    ViewModel() {
+    init {
+        Log.d("ViewModel", "init")
+    }
+    private val _circuitList = MutableLiveData<List<Circuit>>()
+    val circuitNameList: LiveData<List<String>> =
+        Transformations.map(_circuitList) { it.map { circuit -> circuit.name } }
+
+    fun setCircuitList(circuitList: List<Circuit>) {
+        _circuitList.value = circuitList
+    }
+
+    fun loadCircuitList(): LiveData<List<Circuit>> {
+        return circuitRepository.getAll()
+    }
+
+    private val _selectedCircuit = MutableLiveData<Circuit>()
+    val selectedCircuitPosition = MediatorLiveData<Int>().apply {
+        addSource(_circuitList, Observer {
+            value = if (_circuitList.value?.isNotEmpty() == true) {
+                it.indexOf(_selectedCircuit.value)
+            } else {
+                0
+            }
+        })
+        addSource(_selectedCircuit, Observer {
+            _circuitList.value?.let {
+                if (it.isNotEmpty()) {
+                    value = it.indexOf(_selectedCircuit.value)
+                }
+            }
+        })
+    }
+
+    fun selectCircuitAt(position: Int) {
+        _circuitList.value?.let {
+            _selectedCircuit.value = it[position]
+        }
+    }
+
     private val meetingDate = MutableLiveData<Date>().apply {
         value = Date()
     }

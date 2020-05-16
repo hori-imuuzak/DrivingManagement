@@ -31,11 +31,15 @@
                 android:layout_height="wrap_content"
                 android:text="@string/holding_circuit" />
 
-            <Spinner
+            <androidx.appcompat.widget.AppCompatSpinner
                 android:id="@+id/circuitSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/small" />
+                android:layout_marginTop="@dimen/small"
+                android:entries="@{viewModel.circuitNameList}"
+                android:spinnerMode="dialog"
+                android:onItemSelected="@{(parent, view, position, id) -> viewModel.selectCircuitAt(position)}"
+                android:selectedItemPosition="@{viewModel.selectedCircuitPosition}" />
 
             <Button
                 android:id="@+id/button1"
@@ -46,9 +50,9 @@
                 android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
                 android:focusable="true"
+                android:onClick="@{() -> uiEvent.onClickCreateCircuit()}"
                 android:paddingHorizontal="8dp"
                 android:text="@string/add_circuit"
-                android:onClick="@{() -> uiEvent.onClickCreateCircuit()}"
                 android:textColor="@color/colorPrimary" />
 
             <TextView

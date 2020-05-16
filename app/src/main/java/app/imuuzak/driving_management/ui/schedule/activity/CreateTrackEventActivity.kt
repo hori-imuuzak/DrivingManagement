@@ -6,13 +6,22 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import app.imuuzak.driving_management.DrivingManagementApp
 import app.imuuzak.driving_management.R
 import app.imuuzak.driving_management.databinding.ActivityCreateTrackEventBinding
+import app.imuuzak.driving_management.di.ViewModelFactory
 import app.imuuzak.driving_management.ui.circuit.activity.CreateCircuitActivity
 import app.imuuzak.driving_management.ui.schedule.viewmodel.CreateTrackEventViewModel
 import java.util.*
+import javax.inject.Inject
 
 class CreateTrackEventActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+    lateinit var viewModel: CreateTrackEventViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,13 +31,15 @@ class CreateTrackEventActivity : AppCompatActivity() {
             R.layout.activity_create_track_event
         )
 
+        (application as DrivingManagementApp).getComponent().inject(this)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(CreateTrackEventViewModel::class.java)
+
         bind(binding)
+        observe()
     }
 
     private fun bind(binding: ActivityCreateTrackEventBinding) {
         binding.lifecycleOwner = this
-        val viewModel = CreateTrackEventViewModel()
-
         binding.viewModel = viewModel
 
         binding.uiEvent = object : UIEvent {
@@ -63,6 +74,11 @@ class CreateTrackEventActivity : AppCompatActivity() {
         }
     }
 
+    private fun observe() {
+        viewModel.loadCircuitList().observe(this, Observer {
+            viewModel.setCircuitList(it)
+        })
+    }
 
     private fun showTimePicker(listener: TimePickerDialog.OnTimeSetListener) {
         TimePickerDialog(this, listener, 9, 0, true).show()
