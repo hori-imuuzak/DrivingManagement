@@ -5,15 +5,15 @@ package app.imuuzak.driving_management.domain.model
  */
 class Organizer(
     // 名称
-    val name: String,
+    val name: String = "",
     // 名称（カナ）
-    val kana: String,
+    val kana: String = "",
     // 代表者名
-    val representativeName: String,
+    val representativeName: String = "",
     // 電話番号
-    val tel: String,
+    val tel: String = "",
     // メールアドレス
-    val email: String,
+    val email: String = "",
     // 振込先
-    val bankAccount: List<BankAccount>
+    val bankAccount: List<BankAccount> = listOf()
 )

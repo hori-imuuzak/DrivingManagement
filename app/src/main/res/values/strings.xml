@@ -5,4 +5,28 @@
     <string name="title_schedule">走行</string>
     <string name="title_record">レコード</string>
     <string name="title_setting">設定</string>
+    <string name="create_track_event">走行会イベントの作成</string>
+    <string name="holding_circuit">開催サーキット</string>
+    <string name="add_circuit">サーキットを新しく追加する</string>
+    <string name="hit_circuit_name">富士スピードウェイ</string>
+    <string name="hit_circuit_kana">フジスピードウェイ</string>
+    <string name="hit_circuit_url">https://www.fsw.tv</string>
+    <string name="organizer">主催者</string>
+    <string name="add_organizer">主催者を新しく追加する</string>
+    <string name="belongings">持ち物</string>
+    <string name="meeting_date">開催日</string>
+    <string name="meeting_time">集合時間</string>
+    <string name="dismissal_time">解散時間</string>
+    <string name="precautions">注意事項</string>
+    <string name="precautions_hint">開催や当日の予定などについての注意事項があればメモとして入力してください。</string>
+    <string name="price">参加料金</string>
+    <string name="price_with_tax">参加料金（税込）</string>
+    <string name="payment_method">支払い方法</string>
+    <string name="payment_deadline">支払い期限</string>
+    <string name="date_pick">日付を選択する</string>
+    <string name="create">作成する</string>
+
+    <string name="name">名前</string>
+    <string name="name_kana">名前（カナ）</string>
+    <string name="url">URL</string>
 </resources>

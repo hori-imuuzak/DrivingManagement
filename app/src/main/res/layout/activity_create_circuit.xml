@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.circuit.activity.CreateCircuitActivity">
+
+    <data>
+
+        <variable
+            name="uiEvent"
+            type="app.imuuzak.driving_management.ui.circuit.activity.CreateCircuitActivity.Companion.UIEvent" />
+
+        <variable
+            name="viewModel"
+            type="app.imuuzak.driving_management.ui.circuit.viewmodel.CreateCircuitViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/medium">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/name" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small"
+                android:autofillHints="@string/hit_circuit_name"
+                android:hint="@string/hit_circuit_name"
+                android:inputType="text"
+                android:text="@={viewModel.name}" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium"
+                android:text="@string/name" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small"
+                android:autofillHints="@string/hit_circuit_kana"
+                android:hint="@string/hit_circuit_kana"
+                android:inputType="text"
+                android:text="@={viewModel.nameKana}" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium"
+                android:text="@string/name" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small"
+                android:autofillHints="@string/hit_circuit_url"
+                android:hint="@string/hit_circuit_url"
+                android:inputType="textUri"
+                android:text="@={viewModel.url}" />
+        </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:onClick="@{() -> uiEvent.onClickCreate()}"
+            android:text="@string/create" />
+    </LinearLayout>
+</layout>

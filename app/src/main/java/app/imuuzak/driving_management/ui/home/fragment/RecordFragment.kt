@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import app.imuuzak.driving_management.R
-import app.imuuzak.driving_management.viewmodel.home.RecordViewModel
+import app.imuuzak.driving_management.ui.home.viewmodel.RecordViewModel
 
 class RecordFragment : Fragment() {
 

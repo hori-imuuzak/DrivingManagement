@@ -1,4 +1,4 @@
-package app.imuuzak.driving_management.viewmodel.home
+package app.imuuzak.driving_management.ui.home.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

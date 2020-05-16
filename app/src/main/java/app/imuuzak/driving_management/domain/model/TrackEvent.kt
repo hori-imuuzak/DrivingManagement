@@ -2,29 +2,30 @@ package app.imuuzak.driving_management.domain.model
 
 import app.imuuzak.driving_management.domain.model.value.PaymentMethod
 import app.imuuzak.driving_management.domain.model.value.Schedule
+import app.imuuzak.driving_management.domain.model.value.Time
 
 /**
  * 走行会
  */
 data class TrackEvent(
     // 開催サーキット
-    val circuit: Circuit,
+    var circuit: Circuit = Circuit(),
     // 主催者
-    val organizer: Organizer,
+    var organizer: Organizer = Organizer(),
     // 持ち物
-    val belongings: List<Belonging>,
+    var belongings: List<Belonging> = listOf(),
+    // 開催日程
+    var date: Schedule = Schedule(),
     // 集合時間
-    val meetingTime: Schedule,
+    var meetingTime: Time = Time(),
     // 解散時間
-    val dismissalTime: Schedule?,
+    var dismissalTime: Time = Time(),
     // 注意事項
-    val precautions: String,
+    var precautions: String = "",
     // 料金
-    val price: Int,
-    // 料金税込
-    val priceWithTax: Int,
+    var price: Int = 0,
     // 支払い方法
-    val paymentMethod: PaymentMethod,
+    var paymentMethod: PaymentMethod? = null,
     // 支払い期限
-    val paymentDeadline: Schedule?
+    var paymentDeadline: Schedule = Schedule()
 )
