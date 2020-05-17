@@ -6,15 +6,13 @@ import androidx.lifecycle.Observer
 import app.imuuzak.driving_management.domain.model.Circuit
 import app.imuuzak.driving_management.domain.model.value.Time
 import app.imuuzak.driving_management.domain.repository.CircuitRepository
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
 class CreateTrackEventViewModel @Inject constructor(private val circuitRepository: CircuitRepository) :
     ViewModel() {
-    init {
-        Log.d("ViewModel", "init")
-    }
     private val _circuitList = MutableLiveData<List<Circuit>>()
     val circuitNameList: LiveData<List<String>> =
         Transformations.map(_circuitList) { it.map { circuit -> circuit.name } }
@@ -24,7 +22,16 @@ class CreateTrackEventViewModel @Inject constructor(private val circuitRepositor
     }
 
     fun loadCircuitList(): LiveData<List<Circuit>> {
-        return circuitRepository.getAll()
+        val data = MutableLiveData<List<Circuit>>().apply {
+            value = listOf()
+        }
+
+        viewModelScope.launch {
+            val circuitList = circuitRepository.getAll()
+            data.value = circuitList
+        }
+
+        return data
     }
 
     private val _selectedCircuit = MutableLiveData<Circuit>()

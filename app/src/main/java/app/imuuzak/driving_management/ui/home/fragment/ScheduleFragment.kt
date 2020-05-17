@@ -34,12 +34,12 @@ class ScheduleFragment : Fragment() {
     private fun bind(binding: FragmentScheduleBinding) {
         binding.uiEvent = object: UIEvent {
             override fun onClickFloatingActionButton() {
-                toCreateTaskEvent()
+                toCreateTrackEvent()
             }
         }
     }
 
-    private fun toCreateTaskEvent() {
+    private fun toCreateTrackEvent() {
         val intent = Intent(activity, CreateTrackEventActivity::class.java)
         startActivity(intent)
     }

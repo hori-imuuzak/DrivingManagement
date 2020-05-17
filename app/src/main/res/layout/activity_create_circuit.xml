@@ -54,7 +54,7 @@
                 android:autofillHints="@string/hit_circuit_kana"
                 android:hint="@string/hit_circuit_kana"
                 android:inputType="text"
-                android:text="@={viewModel.nameKana}" />
+                android:text="@={viewModel.kana}" />
 
             <TextView
                 android:layout_width="wrap_content"

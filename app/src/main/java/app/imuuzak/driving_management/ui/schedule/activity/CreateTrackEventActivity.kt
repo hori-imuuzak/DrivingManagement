@@ -12,6 +12,7 @@ import app.imuuzak.driving_management.DrivingManagementApp
 import app.imuuzak.driving_management.R
 import app.imuuzak.driving_management.databinding.ActivityCreateTrackEventBinding
 import app.imuuzak.driving_management.di.ViewModelFactory
+import app.imuuzak.driving_management.domain.model.Circuit
 import app.imuuzak.driving_management.ui.circuit.activity.CreateCircuitActivity
 import app.imuuzak.driving_management.ui.schedule.viewmodel.CreateTrackEventViewModel
 import java.util.*
@@ -35,6 +36,11 @@ class CreateTrackEventActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this, viewModelFactory).get(CreateTrackEventViewModel::class.java)
 
         bind(binding)
+    }
+
+    override fun onResume() {
+        super.onResume()
+
         observe()
     }
 
