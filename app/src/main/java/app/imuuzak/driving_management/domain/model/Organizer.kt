@@ -1,19 +1,36 @@
 package app.imuuzak.driving_management.domain.model
 
+import android.util.Patterns
+import java.lang.IllegalArgumentException
+
 /**
  * 走行会主催者
  */
 class Organizer(
     // 名称
     val name: String = "",
-    // 名称（カナ）
+    // 名前（カナ）
     val kana: String = "",
     // 代表者名
     val representativeName: String = "",
     // 電話番号
-    val tel: String = "",
+    val phoneNumber: String = "",
     // メールアドレス
     val email: String = "",
     // 振込先
     val bankAccount: List<BankAccount> = listOf()
-)
+) {
+    init {
+        if (name.isEmpty()) {
+            throw IllegalArgumentException("name")
+        }
+
+        if (kana.isEmpty() or kana.matches("^[\\u30A0-\\u30FF]+$".toRegex()).not()) {
+            throw IllegalArgumentException("kana")
+        }
+
+        if (email.isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches().not()) {
+            throw IllegalArgumentException("email")
+        }
+    }
+}

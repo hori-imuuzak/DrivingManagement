@@ -1,4 +1,4 @@
-package app.imuuzak.driving_management.ui.circuit.activity
+package app.imuuzak.driving_management.ui.organizer.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,47 +8,50 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import app.imuuzak.driving_management.DrivingManagementApp
 import app.imuuzak.driving_management.R
-import app.imuuzak.driving_management.databinding.ActivityCreateCircuitBinding
+import app.imuuzak.driving_management.databinding.ActivityCreateOrganizerBinding
 import app.imuuzak.driving_management.di.ViewModelFactory
 import app.imuuzak.driving_management.domain.repository.ResourceState
-import app.imuuzak.driving_management.ui.circuit.viewmodel.CreateCircuitViewModel
+import app.imuuzak.driving_management.ui.organizer.viewmodel.CreateOrganizerViewModel
 import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 
-class CreateCircuitActivity : AppCompatActivity() {
+class CreateOrganizerActivity : AppCompatActivity() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-    lateinit var viewModel: CreateCircuitViewModel
+    lateinit var viewModel: CreateOrganizerViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         (application as DrivingManagementApp).getComponent().inject(this)
 
-        val binding = DataBindingUtil.setContentView<ActivityCreateCircuitBinding>(
+        val binding = DataBindingUtil.setContentView<ActivityCreateOrganizerBinding>(
             this,
-            R.layout.activity_create_circuit
+            R.layout.activity_create_organizer
         )
 
-        viewModel = ViewModelProvider(this, viewModelFactory).get(CreateCircuitViewModel::class.java)
+        viewModel =
+            ViewModelProvider(this, viewModelFactory).get(CreateOrganizerViewModel::class.java)
 
         bind(binding)
+
         observe()
     }
 
-    private fun bind(binding: ActivityCreateCircuitBinding) {
+    private fun bind(binding: ActivityCreateOrganizerBinding) {
+        binding.lifecycleOwner = this
+        binding.viewModel = viewModel
+
         binding.uiEvent = object : UIEvent {
             override fun onClickCreate() {
-                viewModel.createCircuit()
+                viewModel.createOrganizer()
             }
         }
-
-        binding.viewModel = viewModel
     }
 
     private fun observe() {
-        viewModel.circuitResource.observe(this, Observer {
+        viewModel.createdOrganizerResource.observe(this, Observer {
             when (it.status) {
                 ResourceState.Status.SUCCESS -> {
                     showSnackbar(getString(R.string.success_create))
@@ -57,6 +60,7 @@ class CreateCircuitActivity : AppCompatActivity() {
                 ResourceState.Status.LOADING -> {
                 }
                 ResourceState.Status.ERROR -> {
+                    print(it.message)
                     showSnackbar(getString(R.string.error_create))
                 }
             }

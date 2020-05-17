@@ -12,8 +12,8 @@ import app.imuuzak.driving_management.DrivingManagementApp
 import app.imuuzak.driving_management.R
 import app.imuuzak.driving_management.databinding.ActivityCreateTrackEventBinding
 import app.imuuzak.driving_management.di.ViewModelFactory
-import app.imuuzak.driving_management.domain.model.Circuit
 import app.imuuzak.driving_management.ui.circuit.activity.CreateCircuitActivity
+import app.imuuzak.driving_management.ui.organizer.activity.CreateOrganizerActivity
 import app.imuuzak.driving_management.ui.schedule.viewmodel.CreateTrackEventViewModel
 import java.util.*
 import javax.inject.Inject
@@ -27,12 +27,13 @@ class CreateTrackEventActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        (application as DrivingManagementApp).getComponent().inject(this)
+
         val binding = DataBindingUtil.setContentView<ActivityCreateTrackEventBinding>(
             this,
             R.layout.activity_create_track_event
         )
 
-        (application as DrivingManagementApp).getComponent().inject(this)
         viewModel = ViewModelProvider(this, viewModelFactory).get(CreateTrackEventViewModel::class.java)
 
         bind(binding)
@@ -51,6 +52,11 @@ class CreateTrackEventActivity : AppCompatActivity() {
         binding.uiEvent = object : UIEvent {
             override fun onClickCreateCircuit() {
                 val intent = Intent(this@CreateTrackEventActivity, CreateCircuitActivity::class.java)
+                startActivity(intent)
+            }
+
+            override fun onClickCreateOrganizer() {
+                val intent = Intent(this@CreateTrackEventActivity, CreateOrganizerActivity::class.java)
                 startActivity(intent)
             }
 
@@ -84,6 +90,10 @@ class CreateTrackEventActivity : AppCompatActivity() {
         viewModel.loadCircuitList().observe(this, Observer {
             viewModel.setCircuitList(it)
         })
+
+        viewModel.loadOrganizerList().observe(this, Observer {
+            viewModel.setOrganizerList(it)
+        })
     }
 
     private fun showTimePicker(listener: TimePickerDialog.OnTimeSetListener) {
@@ -104,6 +114,7 @@ class CreateTrackEventActivity : AppCompatActivity() {
     companion object {
         interface UIEvent {
             fun onClickCreateCircuit()
+            fun onClickCreateOrganizer()
             fun onClickMeetingDate()
             fun onClickMeetingTime()
             fun onClickDismissalTime()

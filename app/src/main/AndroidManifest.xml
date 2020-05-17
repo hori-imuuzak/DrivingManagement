@@ -23,6 +23,11 @@
             android:label="@string/add_circuit"
             android:parentActivityName=".ui.schedule.activity.CreateTrackEventActivity" />
         <activity
+            android:name=".ui.organizer.activity.CreateOrganizerActivity"
+            android:label="@string/add_organizer"
+            android:parentActivityName=".ui.schedule.activity.CreateTrackEventActivity" />
+
+        <activity
             android:name=".ui.splash.activity.SplashActivity"
             android:theme="@style/FullScreen">
             <intent-filter>

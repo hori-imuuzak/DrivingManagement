@@ -8,11 +8,24 @@
     <string name="create_track_event">走行会イベントの作成</string>
     <string name="holding_circuit">開催サーキット</string>
     <string name="add_circuit">サーキットを新しく追加する</string>
-    <string name="hit_circuit_name">富士スピードウェイ</string>
-    <string name="hit_circuit_kana">フジスピードウェイ</string>
-    <string name="hit_circuit_url">https://www.fsw.tv</string>
+    <string name="hint_circuit_name">富士スピードウェイ</string>
+    <string name="hint_circuit_kana">フジスピードウェイ</string>
+    <string name="hint_circuit_url">https://www.fsw.tv</string>
     <string name="organizer">主催者</string>
+    <string name="organizer_is_empty">主催者が登録されていません。</string>
     <string name="add_organizer">主催者を新しく追加する</string>
+    <string name="hint_organizer_name">株式会社ドライビングチーム</string>
+    <string name="hint_organizer_kana">ドライビングチーム</string>
+    <string name="hint_organizer_representative_name">代表太郎</string>
+    <string name="hint_organizer_tel">08012345678</string>
+    <string name="hint_organizer_email">info@driving-team.co.jp</string>
+    <string name="hint_organizer_payee_bank_name">XXX銀行</string>
+    <string name="hint_organizer_payee_bank_branch_name">XXX支店</string>
+    <string name="account_type_savings">普通</string>
+    <string name="account_type_current">当座</string>
+    <string name="hint_organizer_payee_bank_holder">ドライビングチーム</string>
+    <string name="hint_organizer_payee_account_number">01231234</string>
+
     <string name="belongings">持ち物</string>
     <string name="meeting_date">開催日</string>
     <string name="meeting_time">集合時間</string>
@@ -29,6 +42,15 @@
     <string name="name">名前</string>
     <string name="name_kana">名前（カナ）</string>
     <string name="url">URL</string>
+    <string name="representative_name">代表者名</string>
+    <string name="phone_number">電話番号</string>
+    <string name="email">メールアドレス</string>
+    <string name="payee_info">振込先情報</string>
+    <string name="payee_bank_name">銀行名</string>
+    <string name="payee_bank_branch_name">支店名</string>
+    <string name="payee_bank_account_type">口座種別</string>
+    <string name="payee_bank_holder_name">振込先名称</string>
+    <string name="payee_bank_account_number">口座番号</string>
 
     <string name="success_create">作成しました。</string>
     <string name="error_create">作成に失敗しました。時間をおいて再度お試しください。</string>

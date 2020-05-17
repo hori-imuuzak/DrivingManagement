@@ -6,6 +6,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="uiEvent"
             type="app.imuuzak.driving_management.ui.schedule.activity.CreateTrackEventActivity.Companion.UIEvent" />
@@ -29,7 +31,8 @@
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/holding_circuit" />
+                android:text="@string/holding_circuit"
+                android:textStyle="bold" />
 
             <androidx.appcompat.widget.AppCompatSpinner
                 android:id="@+id/circuitSpinner"
@@ -37,9 +40,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/small"
                 android:entries="@{viewModel.circuitNameList}"
-                android:spinnerMode="dialog"
                 android:onItemSelected="@{(parent, view, position, id) -> viewModel.selectCircuitAt(position)}"
-                android:selectedItemPosition="@{viewModel.selectedCircuitPosition}" />
+                android:selectedItemPosition="@{viewModel.selectedCircuitPosition}"
+                android:spinnerMode="dialog"
+                android:visibility="@{viewModel.circuitNameList.size() > 0 ? View.VISIBLE : View.INVISIBLE}" />
 
             <Button
                 android:id="@+id/button1"
@@ -60,13 +64,26 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/medium"
-                android:text="@string/organizer" />
+                android:text="@string/organizer"
+                android:textStyle="bold" />
 
-            <Spinner
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small"
+                android:text="@string/organizer_is_empty"
+                android:visibility="@{viewModel.organizerNameList.size() > 0 ? View.GONE : View.VISIBLE}" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
                 android:id="@+id/organizerSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/small" />
+                android:layout_marginTop="@dimen/small"
+                android:entries="@{viewModel.organizerNameList}"
+                android:onItemSelected="@{(parent, view, position, id) -> viewModel.selectOrganizerAt(position)}"
+                android:selectedItemPosition="@{viewModel.selectedOrganizerPosition}"
+                android:spinnerMode="dialog"
+                android:visibility="@{viewModel.organizerNameList.size() > 0 ? View.VISIBLE : View.GONE}" />
 
             <Button
                 android:id="@+id/button2"
@@ -77,6 +94,7 @@
                 android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
                 android:focusable="true"
+                android:onClick="@{() -> uiEvent.onClickCreateOrganizer()}"
                 android:paddingHorizontal="8dp"
                 android:text="@string/add_organizer"
                 android:textColor="@color/colorPrimary" />
@@ -86,10 +104,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/medium"
-                android:text="@string/belongings" />
+                android:text="@string/belongings"
+                android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView3"
+                android:id="@+id/belongings_recycler_view"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/small"
@@ -111,7 +130,8 @@
                         android:id="@+id/textView11"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/meeting_date" />
+                        android:text="@string/meeting_date"
+                        android:textStyle="bold" />
 
                     <Button
                         android:id="@+id/button5"
@@ -135,7 +155,8 @@
                         android:id="@+id/textView10"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/meeting_time" />
+                        android:text="@string/meeting_time"
+                        android:textStyle="bold" />
 
                     <Button
                         android:id="@+id/button4"
@@ -158,7 +179,8 @@
                         android:id="@+id/textView9"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/dismissal_time" />
+                        android:text="@string/dismissal_time"
+                        android:textStyle="bold" />
 
                     <Button
                         android:id="@+id/button3"
@@ -177,7 +199,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/medium"
-                android:text="@string/precautions" />
+                android:text="@string/precautions"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/editText"
@@ -201,7 +224,8 @@
                     android:id="@+id/textView5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/price" />
+                    android:text="@string/price"
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/editText2"
@@ -224,7 +248,8 @@
                     android:id="@+id/textView7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/price_with_tax" />
+                    android:text="@string/price_with_tax"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/textView8"
@@ -237,7 +262,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/medium"
-                android:text="@string/payment_method" />
+                android:text="@string/payment_method"
+                android:textStyle="bold" />
 
             <Spinner
                 android:layout_width="match_parent"
@@ -248,7 +274,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/medium"
-                android:text="@string/payment_deadline" />
+                android:text="@string/payment_deadline"
+                android:textStyle="bold" />
 
             <Button
                 android:layout_width="wrap_content"

@@ -36,8 +36,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/small"
-                android:autofillHints="@string/hit_circuit_name"
-                android:hint="@string/hit_circuit_name"
+                android:autofillHints="@string/hint_circuit_name"
+                android:hint="@string/hint_circuit_name"
                 android:inputType="text"
                 android:text="@={viewModel.name}" />
 
@@ -45,14 +45,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/medium"
-                android:text="@string/name" />
+                android:text="@string/name_kana" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/small"
-                android:autofillHints="@string/hit_circuit_kana"
-                android:hint="@string/hit_circuit_kana"
+                android:autofillHints="@string/hint_circuit_kana"
+                android:hint="@string/hint_circuit_kana"
                 android:inputType="text"
                 android:text="@={viewModel.kana}" />
 
@@ -60,14 +60,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/medium"
-                android:text="@string/name" />
+                android:text="@string/url" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/small"
-                android:autofillHints="@string/hit_circuit_url"
-                android:hint="@string/hit_circuit_url"
+                android:autofillHints="@string/hint_circuit_url"
+                android:hint="@string/hint_circuit_url"
                 android:inputType="textUri"
                 android:text="@={viewModel.url}" />
         </LinearLayout>

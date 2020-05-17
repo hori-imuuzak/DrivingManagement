@@ -1,26 +1,29 @@
 package app.imuuzak.driving_management.ui.schedule.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.*
 import androidx.lifecycle.Observer
 import app.imuuzak.driving_management.domain.model.Circuit
+import app.imuuzak.driving_management.domain.model.Organizer
 import app.imuuzak.driving_management.domain.model.value.Time
 import app.imuuzak.driving_management.domain.repository.CircuitRepository
+import app.imuuzak.driving_management.domain.repository.OrganizerRepository
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
-class CreateTrackEventViewModel @Inject constructor(private val circuitRepository: CircuitRepository) :
+class CreateTrackEventViewModel @Inject constructor(
+    private val circuitRepository: CircuitRepository,
+    private val organizerRepository: OrganizerRepository
+) :
     ViewModel() {
+    // サーキット選択
     private val _circuitList = MutableLiveData<List<Circuit>>()
     val circuitNameList: LiveData<List<String>> =
         Transformations.map(_circuitList) { it.map { circuit -> circuit.name } }
-
     fun setCircuitList(circuitList: List<Circuit>) {
         _circuitList.value = circuitList
     }
-
     fun loadCircuitList(): LiveData<List<Circuit>> {
         val data = MutableLiveData<List<Circuit>>().apply {
             value = listOf()
@@ -34,6 +37,7 @@ class CreateTrackEventViewModel @Inject constructor(private val circuitRepositor
         return data
     }
 
+    // 選択中サーキット
     private val _selectedCircuit = MutableLiveData<Circuit>()
     val selectedCircuitPosition = MediatorLiveData<Int>().apply {
         addSource(_circuitList, Observer {
@@ -51,10 +55,53 @@ class CreateTrackEventViewModel @Inject constructor(private val circuitRepositor
             }
         })
     }
-
     fun selectCircuitAt(position: Int) {
         _circuitList.value?.let {
             _selectedCircuit.value = it[position]
+        }
+    }
+
+    // 主催者選択
+    private val _organizerList = MutableLiveData<List<Organizer>>()
+    val organizerNameList: LiveData<List<String>> =
+        Transformations.map(_organizerList) { it.map { organizer -> organizer.name } }
+    fun setOrganizerList(organizerList: List<Organizer>) {
+        _organizerList.value = organizerList
+    }
+    fun loadOrganizerList(): LiveData<List<Organizer>> {
+        val data = MutableLiveData<List<Organizer>>().apply {
+            value = listOf()
+        }
+
+        viewModelScope.launch {
+            val organizerList = organizerRepository.getAll()
+            data.value = organizerList
+        }
+
+        return data
+    }
+
+    // 選択中主催者
+    private val _selectedOrganizer = MutableLiveData<Organizer>()
+    val selectedOrganizerPosition = MediatorLiveData<Int>().apply {
+        addSource(_organizerList, Observer {
+            value = if (_organizerList.value?.isNotEmpty() == true) {
+                it.indexOf(_selectedOrganizer.value)
+            } else {
+                0
+            }
+        })
+        addSource(_selectedOrganizer, Observer {
+            _organizerList.value?.let {
+                if (it.isNotEmpty()) {
+                    value = it.indexOf(_selectedOrganizer.value)
+                }
+            }
+        })
+    }
+    fun selectOrganizerAt(position: Int) {
+        _organizerList.value?.let {
+            _selectedOrganizer.value = it[position]
         }
     }
 

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.organizer.activity.CreateOrganizerActivity">
+
+    <data>
+
+        <variable
+            name="uiEvent"
+            type="app.imuuzak.driving_management.ui.organizer.activity.CreateOrganizerActivity.Companion.UIEvent" />
+
+        <variable
+            name="viewModel"
+            type="app.imuuzak.driving_management.ui.organizer.viewmodel.CreateOrganizerViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/medium">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/name" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small"
+                    android:autofillHints="@string/hint_organizer_name"
+                    android:hint="@string/hint_organizer_name"
+                    android:inputType="text"
+                    android:text="@={viewModel.name}" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/medium"
+                    android:text="@string/name_kana" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small"
+                    android:autofillHints="@string/hint_organizer_kana"
+                    android:hint="@string/hint_organizer_kana"
+                    android:inputType="text"
+                    android:text="@={viewModel.kana}" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/medium"
+                    android:text="@string/representative_name" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small"
+                    android:autofillHints="@string/hint_organizer_representative_name"
+                    android:hint="@string/hint_organizer_representative_name"
+                    android:inputType="text"
+                    android:text="@={viewModel.representativeName}" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/medium"
+                    android:text="@string/phone_number" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small"
+                    android:autofillHints="@string/hint_organizer_tel"
+                    android:hint="@string/hint_organizer_tel"
+                    android:inputType="phone"
+                    android:text="@={viewModel.phoneNumber}" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/medium"
+                    android:text="@string/email" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small"
+                    android:autofillHints="@string/hint_organizer_email"
+                    android:hint="@string/hint_organizer_email"
+                    android:inputType="textEmailAddress"
+                    android:text="@={viewModel.email}" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/medium"
+                    android:text="@string/payee_info" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small"
+                    android:autofillHints="@string/payee_bank_name"
+                    android:hint="@string/payee_bank_name"
+                    android:inputType="text"
+                    android:text="@={viewModel.bankName}" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small"
+                    android:autofillHints="@string/payee_bank_branch_name"
+                    android:hint="@string/payee_bank_branch_name"
+                    android:inputType="text"
+                    android:text="@={viewModel.branchName}" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small"
+                    android:autofillHints="@string/payee_bank_holder_name"
+                    android:hint="@string/payee_bank_holder_name"
+                    android:inputType="text"
+                    android:text="@={viewModel.holderName}" />
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small"
+                    android:onCheckedChanged="@{(group, id) -> viewModel.onCheckedChangeAccountType(id)}"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/radio_account_type_savings"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/account_type_savings" />
+
+                    <RadioButton
+                        android:id="@+id/radio_account_type_current"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/account_type_current" />
+                </RadioGroup>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small"
+                    android:autofillHints="@string/payee_bank_account_number"
+                    android:hint="@string/payee_bank_account_number"
+                    android:inputType="numberDecimal"
+                    android:text="@={viewModel.accountNumber}" />
+            </LinearLayout>
+
+        </ScrollView>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:onClick="@{() -> uiEvent.onClickCreate()}"
+            android:text="@string/create" />
+    </LinearLayout>
+</layout>
