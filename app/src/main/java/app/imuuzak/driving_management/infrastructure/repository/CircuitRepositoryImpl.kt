@@ -4,7 +4,7 @@ import app.imuuzak.driving_management.domain.model.Circuit
 import app.imuuzak.driving_management.domain.repository.CircuitRepository
 import app.imuuzak.driving_management.infrastructure.database.AppDatabase
 import app.imuuzak.driving_management.infrastructure.database.entity.CircuitEntity
-import com.google.firebase.firestore.FirebaseFirestore
+import app.imuuzak.driving_management.infrastructure.repository.entity.FirebaseCircuitEntity
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
@@ -12,9 +12,8 @@ class CircuitRepositoryImpl @Inject constructor(val database: AppDatabase) : Cir
     override suspend fun getAll(): List<Circuit> {
         val circuitList = mutableListOf<Circuit>()
 
-        val snapshot = FirebaseFirestore
-            .getInstance()
-            .collection("circuit")
+        val snapshot = FirebaseCircuitEntity
+            .collections()
             .get()
             .await()
         circuitList.addAll(snapshot.documents.map { doc ->
