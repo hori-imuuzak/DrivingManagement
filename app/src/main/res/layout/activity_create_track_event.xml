@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.schedule.activity.CreateTrackEventActivity">
 
@@ -27,12 +28,10 @@
             android:orientation="vertical"
             android:padding="@dimen/medium">
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/holding_circuit"
-                android:textStyle="bold" />
+            <include
+                layout="@layout/required_text_view"
+                bind:isRequired="@{true}"
+                bind:text="@{@string/holding_circuit}" />
 
             <androidx.appcompat.widget.AppCompatSpinner
                 android:id="@+id/circuitSpinner"
@@ -59,13 +58,17 @@
                 android:text="@string/add_circuit"
                 android:textColor="@color/colorPrimary" />
 
-            <TextView
-                android:id="@+id/textView4"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/medium"
-                android:text="@string/organizer"
-                android:textStyle="bold" />
+                android:orientation="vertical">
+
+                <include
+                    layout="@layout/required_text_view"
+                    bind:isRequired="@{true}"
+                    bind:text="@{@string/organizer}" />
+            </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -109,10 +112,25 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/belongings_recycler_view"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/small"
-                android:maxHeight="300dp" />
+                android:maxHeight="300dp"
+                android:visibility="@{viewModel.belongingsCount > 0 ? View.VISIBLE : View.INVISIBLE}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_gravity="end"
+                android:layout_marginTop="@dimen/small"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{() -> uiEvent.onClickCreateBelonging()}"
+                android:paddingHorizontal="8dp"
+                android:text="@string/add_belonging"
+                android:textColor="@color/colorPrimary" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -126,12 +144,10 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/textView11"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/meeting_date"
-                        android:textStyle="bold" />
+                    <include
+                        layout="@layout/required_text_view"
+                        bind:isRequired="@{true}"
+                        bind:text="@{@string/meeting_date}" />
 
                     <Button
                         android:id="@+id/button5"
@@ -220,12 +236,10 @@
                 android:layout_marginTop="@dimen/medium"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/price"
-                    android:textStyle="bold" />
+                <include
+                    layout="@layout/required_text_view"
+                    bind:isRequired="@{true}"
+                    bind:text="@{@string/price}" />
 
                 <EditText
                     android:id="@+id/editText2"
@@ -238,26 +252,6 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/medium"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textView7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/price_with_tax"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/textView8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{viewModel.priceWithTax}" />
-            </LinearLayout>
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -265,10 +259,14 @@
                 android:text="@string/payment_method"
                 android:textStyle="bold" />
 
-            <Spinner
+            <androidx.appcompat.widget.AppCompatSpinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/small" />
+                android:layout_marginTop="@dimen/small"
+                android:entries="@{viewModel.paymentMethodTextList}"
+                android:onItemSelected="@{(parent, view, position, id) -> viewModel.selectPaymentMethodAt(position)}"
+                android:selectedItemPosition="@{viewModel.selectedPaymentMethodPosition}"
+                android:spinnerMode="dialog" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -289,6 +287,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/medium"
+                android:onClick="@{() -> uiEvent.onClickCreate()}"
                 android:text="@string/create" />
         </LinearLayout>
 

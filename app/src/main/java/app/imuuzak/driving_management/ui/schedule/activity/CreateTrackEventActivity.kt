@@ -5,6 +5,7 @@ import android.app.TimePickerDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -12,9 +13,14 @@ import app.imuuzak.driving_management.DrivingManagementApp
 import app.imuuzak.driving_management.R
 import app.imuuzak.driving_management.databinding.ActivityCreateTrackEventBinding
 import app.imuuzak.driving_management.di.ViewModelFactory
+import app.imuuzak.driving_management.domain.model.Belonging
+import app.imuuzak.driving_management.domain.repository.ResourceState
 import app.imuuzak.driving_management.ui.circuit.activity.CreateCircuitActivity
 import app.imuuzak.driving_management.ui.organizer.activity.CreateOrganizerActivity
+import app.imuuzak.driving_management.ui.schedule.adapter.BelongingsListAdapter
+import app.imuuzak.driving_management.ui.schedule.viewmodel.BelongingsListItemViewModel
 import app.imuuzak.driving_management.ui.schedule.viewmodel.CreateTrackEventViewModel
+import com.google.android.material.snackbar.Snackbar
 import java.util.*
 import javax.inject.Inject
 
@@ -23,6 +29,8 @@ class CreateTrackEventActivity : AppCompatActivity() {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
     lateinit var viewModel: CreateTrackEventViewModel
+
+    lateinit var belongingsListAdapter: BelongingsListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,8 +42,10 @@ class CreateTrackEventActivity : AppCompatActivity() {
             R.layout.activity_create_track_event
         )
 
-        viewModel = ViewModelProvider(this, viewModelFactory).get(CreateTrackEventViewModel::class.java)
+        viewModel =
+            ViewModelProvider(this, viewModelFactory).get(CreateTrackEventViewModel::class.java)
 
+        setupUI(binding)
         bind(binding)
     }
 
@@ -45,19 +55,43 @@ class CreateTrackEventActivity : AppCompatActivity() {
         observe()
     }
 
+    private fun setupUI(binding: ActivityCreateTrackEventBinding) {
+        belongingsListAdapter = BelongingsListAdapter()
+        binding.belongingsRecyclerView.adapter = belongingsListAdapter
+    }
+
     private fun bind(binding: ActivityCreateTrackEventBinding) {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
         binding.uiEvent = object : UIEvent {
             override fun onClickCreateCircuit() {
-                val intent = Intent(this@CreateTrackEventActivity, CreateCircuitActivity::class.java)
+                val intent =
+                    Intent(this@CreateTrackEventActivity, CreateCircuitActivity::class.java)
                 startActivity(intent)
             }
 
             override fun onClickCreateOrganizer() {
-                val intent = Intent(this@CreateTrackEventActivity, CreateOrganizerActivity::class.java)
+                val intent =
+                    Intent(this@CreateTrackEventActivity, CreateOrganizerActivity::class.java)
                 startActivity(intent)
+            }
+
+            override fun onClickCreateBelonging() {
+                val belongingsListViewModel =
+                    ViewModelProvider(this@CreateTrackEventActivity).get(BelongingsListItemViewModel::class.java)
+                belongingsListViewModel.setBelonging(Belonging("sample", 1))
+                belongingsListViewModel.uiEvent = object: BelongingsListItemViewModel.UIEvent {
+                    override fun onClickRemove() {
+                        val removedAt = belongingsListAdapter.removeBelonging(belongingsListViewModel)
+                        belongingsListAdapter.notifyItemRemoved(removedAt)
+                        viewModel.removeBelonging()
+                    }
+                }
+
+                belongingsListAdapter.addBelonging(belongingsListViewModel)
+                belongingsListAdapter.notifyItemInserted(belongingsListAdapter.itemCount - 1)
+                viewModel.addBelonging()
             }
 
             override fun onClickMeetingDate() {
@@ -83,6 +117,10 @@ class CreateTrackEventActivity : AppCompatActivity() {
                     viewModel.setPaymentDeadline(year, month, dayOfMonth)
                 })
             }
+
+            override fun onClickCreate() {
+                viewModel.createTrackEvent(belongingsListAdapter.belongingsListItemViewModels)
+            }
         }
     }
 
@@ -93,6 +131,21 @@ class CreateTrackEventActivity : AppCompatActivity() {
 
         viewModel.loadOrganizerList().observe(this, Observer {
             viewModel.setOrganizerList(it)
+        })
+
+        viewModel.createdTrackEventResource.observe(this, Observer {
+            when (it.status) {
+                ResourceState.Status.LOADING -> {
+                    // ローディング出す
+                }
+                ResourceState.Status.SUCCESS -> {
+                    finish()
+                }
+                ResourceState.Status.ERROR -> {
+                    print(it.message)
+                    showSnackbar(getString(R.string.error_create))
+                }
+            }
         })
     }
 
@@ -111,14 +164,20 @@ class CreateTrackEventActivity : AppCompatActivity() {
         ).show()
     }
 
+    private fun showSnackbar(str: String) {
+        Snackbar.make(findViewById<View>(android.R.id.content), str, Snackbar.LENGTH_SHORT).show()
+    }
+
     companion object {
         interface UIEvent {
             fun onClickCreateCircuit()
             fun onClickCreateOrganizer()
+            fun onClickCreateBelonging()
             fun onClickMeetingDate()
             fun onClickMeetingTime()
             fun onClickDismissalTime()
             fun onClickPaymentDeadline()
+            fun onClickCreate()
         }
     }
 }

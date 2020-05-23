@@ -5,7 +5,13 @@ package app.imuuzak.driving_management.domain.model
  */
 data class Belonging(
     // 名前
-    val name: String,
+    val name: String?,
     // 個数
     val count: Int
-)
+) {
+    init {
+        if (name == null) {
+            throw IllegalArgumentException("name")
+        }
+    }
+}

@@ -14,6 +14,8 @@
     <string name="organizer">主催者</string>
     <string name="organizer_is_empty">主催者が登録されていません。</string>
     <string name="add_organizer">主催者を新しく追加する</string>
+    <string name="add_belonging">持ち物を増やす</string>
+    <string name="hint_belonging">入力してください</string>
     <string name="hint_organizer_name">株式会社ドライビングチーム</string>
     <string name="hint_organizer_kana">ドライビングチーム</string>
     <string name="hint_organizer_representative_name">代表太郎</string>
@@ -25,6 +27,13 @@
     <string name="account_type_current">当座</string>
     <string name="hint_organizer_payee_bank_holder">ドライビングチーム</string>
     <string name="hint_organizer_payee_account_number">01231234</string>
+
+    <string name="payment_method_card">クレジットカード</string>
+    <string name="payment_method_bank">銀行振込</string>
+    <string name="payment_method_payment_service">決済サービス払い</string>
+    <string name="payment_method_convenience_store">コンビニ払い</string>
+    <string name="payment_method_local">現地払い</string>
+    <string name="payment_method_other">その他</string>
 
     <string name="belongings">持ち物</string>
     <string name="meeting_date">開催日</string>

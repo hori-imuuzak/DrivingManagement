@@ -9,23 +9,41 @@ import app.imuuzak.driving_management.domain.model.value.Time
  */
 data class TrackEvent(
     // 開催サーキット
-    var circuit: Circuit = Circuit(),
+    var circuit: Circuit?,
     // 主催者
-    var organizer: Organizer = Organizer(),
+    var organizer: Organizer?,
     // 持ち物
     var belongings: List<Belonging> = listOf(),
     // 開催日程
-    var date: Schedule = Schedule(),
+    var date: Schedule?,
     // 集合時間
-    var meetingTime: Time = Time(),
+    var meetingTime: Time? = Time(),
     // 解散時間
-    var dismissalTime: Time = Time(),
+    var dismissalTime: Time? = Time(),
     // 注意事項
-    var precautions: String = "",
+    var precautions: String? = "",
     // 料金
-    var price: Int = 0,
+    var price: Int?,
     // 支払い方法
     var paymentMethod: PaymentMethod? = null,
     // 支払い期限
-    var paymentDeadline: Schedule = Schedule()
-)
+    var paymentDeadline: Schedule? = Schedule()
+) {
+    init {
+        if (circuit == null) {
+            throw IllegalArgumentException("circuit")
+        }
+
+        if (organizer == null) {
+            throw IllegalArgumentException("organizer")
+        }
+
+        if (date == null) {
+            throw IllegalArgumentException("date")
+        }
+
+        if (price == null) {
+            throw IllegalArgumentException("price")
+        }
+    }
+}
