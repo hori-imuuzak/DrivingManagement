@@ -7,32 +7,43 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import app.imuuzak.driving_management.R
 import app.imuuzak.driving_management.databinding.FragmentScheduleBinding
+import app.imuuzak.driving_management.ui.home.adapter.ScheduleListAdapter
 import app.imuuzak.driving_management.ui.home.viewmodel.ScheduleViewModel
 import app.imuuzak.driving_management.ui.schedule.activity.CreateTrackEventActivity
 
 class ScheduleFragment : Fragment() {
 
-    private lateinit var scheduleViewModel: ScheduleViewModel
+    private lateinit var viewModel: ScheduleViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        scheduleViewModel =
-            ViewModelProviders.of(this).get(ScheduleViewModel::class.java)
-        val binding = DataBindingUtil.inflate<FragmentScheduleBinding>(layoutInflater, R.layout.fragment_schedule, container, false)
+        this.viewModel =
+            ViewModelProvider(this).get(ScheduleViewModel::class.java)
+        val binding = DataBindingUtil.inflate<FragmentScheduleBinding>(
+            layoutInflater,
+            R.layout.fragment_schedule,
+            container,
+            false
+        )
 
+        setupUI(binding)
         bind(binding)
 
         return binding.root
     }
 
+    private fun setupUI(binding: FragmentScheduleBinding) {
+        binding.scheduleRecyclerView.adapter = ScheduleListAdapter()
+    }
+
     private fun bind(binding: FragmentScheduleBinding) {
-        binding.uiEvent = object: UIEvent {
+        binding.uiEvent = object : UIEvent {
             override fun onClickFloatingActionButton() {
                 toCreateTrackEvent()
             }

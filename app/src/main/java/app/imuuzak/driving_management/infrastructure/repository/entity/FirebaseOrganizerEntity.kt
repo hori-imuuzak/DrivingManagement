@@ -22,7 +22,11 @@ data class FirebaseOrganizerEntity(
 
     // メールアドレス
     @PropertyName("email")
-    val email: String = ""
+    val email: String = "",
+
+    // 支払い先
+    @PropertyName("bank_account")
+    val bankAccount: List<FirebaseBankAccountEntity>? = null
 ) {
     companion object {
         fun from(model: Organizer?): FirebaseOrganizerEntity {
@@ -31,7 +35,8 @@ data class FirebaseOrganizerEntity(
                 kana = model?.kana ?: "",
                 representativeName = model?.representativeName ?: "",
                 phoneNumber = model?.phoneNumber ?: "",
-                email = model?.email ?: ""
+                email = model?.email ?: "",
+                bankAccount = model?.bankAccount?.map { FirebaseBankAccountEntity.from(it) }
             )
         }
     }

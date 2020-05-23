@@ -16,7 +16,8 @@ data class FirebaseTrackEventEntity(
     var organizer: FirebaseOrganizerEntity? = null,
 
     // 持ち物
-    // var belongings: List<Belonging> = listOf(),
+    @PropertyName("belongings")
+    var belongings: List<FirebaseBelongingEntity>? = null,
 
     // 開催日程
     @PropertyName("date_start")
@@ -64,6 +65,7 @@ data class FirebaseTrackEventEntity(
             return FirebaseTrackEventEntity(
                 circuit = FirebaseCircuitEntity.from(model.circuit),
                 organizer = FirebaseOrganizerEntity.from(model.organizer),
+                belongings = model.belongings.map { FirebaseBelongingEntity.from(it) },
                 dateStart = model.date?.begin,
                 dateEnd = model.date?.end,
                 meetingTimeHour = model.meetingTime?.hour,

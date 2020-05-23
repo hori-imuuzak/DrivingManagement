@@ -4,7 +4,16 @@
     <string name="title_activity_home">ホーム</string>
     <string name="title_schedule">走行</string>
     <string name="title_record">レコード</string>
+    <string name="title_car_management">メンテナンス</string>
     <string name="title_setting">設定</string>
+
+    <string name="schedule_date">開催日時</string>
+    <string name="place">場所</string>
+    <string name="has_precautions">注意事項の記載あり</string>
+    <string name="payment_status">支払い状況</string>
+    <string name="weather">天気予報</string>
+    <string name="temperature">予想気温</string>
+
     <string name="create_track_event">走行会イベントの作成</string>
     <string name="holding_circuit">開催サーキット</string>
     <string name="add_circuit">サーキットを新しく追加する</string>
