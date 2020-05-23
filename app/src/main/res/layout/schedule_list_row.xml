@@ -2,6 +2,19 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:bind="http://schemas.android.com/apk/res-auto">
 
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="position"
+            type="Integer" />
+
+        <variable
+            name="viewModel"
+            type="app.imuuzak.driving_management.ui.home.viewmodel.ScheduleViewModel" />
+    </data>
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -38,7 +51,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/medium"
-                        android:text="yyyy/MM/dd hh:mm ~ hh:mm" />
+                        android:textStyle="bold"
+                        android:text="@{viewModel.dateText(position)}" />
                 </LinearLayout>
 
                 <!-- // 場所 -->
@@ -57,7 +71,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/medium"
-                        android:text="ほげほげサーキット" />
+                        android:textStyle="bold"
+                        android:text="@{viewModel.placeText(position)}" />
                 </LinearLayout>
 
                 <!-- // 主催者 -->
@@ -76,7 +91,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/medium"
-                        android:text="ふがふがドリフトグループ" />
+                        android:textStyle="bold"
+                        android:text="@{viewModel.organizerText(position)}" />
                 </LinearLayout>
 
                 <!-- // 注意事項 -->
@@ -86,7 +102,9 @@
                     android:layout_gravity="end"
                     android:layout_marginTop="@dimen/small"
                     android:text="@string/has_precautions"
-                    android:textColor="@color/colorPrecautions" />
+                    android:textColor="@color/colorPrecautions"
+                    android:textStyle="bold"
+                    android:visibility="@{viewModel.hasPrecaution(position) ? View.VISIBLE: View.GONE}" />
 
                 <!-- // 支払い情報 -->
                 <LinearLayout
@@ -109,12 +127,13 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="支払い前" />
+                            android:textStyle="bold"
+                            android:text="@{viewModel.paymentStatusText(position)}" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="期限：yyyy/MM/dd" />
+                            android:text="@{viewModel.paymentDeadlineText(position)}" />
 
                     </LinearLayout>
                 </LinearLayout>

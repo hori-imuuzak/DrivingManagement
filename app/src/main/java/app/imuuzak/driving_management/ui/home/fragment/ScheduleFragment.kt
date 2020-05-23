@@ -7,24 +7,34 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import app.imuuzak.driving_management.DrivingManagementApp
 import app.imuuzak.driving_management.R
 import app.imuuzak.driving_management.databinding.FragmentScheduleBinding
+import app.imuuzak.driving_management.di.ViewModelFactory
 import app.imuuzak.driving_management.ui.home.adapter.ScheduleListAdapter
 import app.imuuzak.driving_management.ui.home.viewmodel.ScheduleViewModel
 import app.imuuzak.driving_management.ui.schedule.activity.CreateTrackEventActivity
+import javax.inject.Inject
 
-class ScheduleFragment : Fragment() {
+class ScheduleFragment @Inject constructor() : Fragment() {
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
 
     private lateinit var viewModel: ScheduleViewModel
+    private lateinit var scheduleListAdapter: ScheduleListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        (activity?.application as DrivingManagementApp).getComponent().inject(this)
+
         this.viewModel =
-            ViewModelProvider(this).get(ScheduleViewModel::class.java)
+            ViewModelProvider(this, viewModelFactory).get(ScheduleViewModel::class.java)
         val binding = DataBindingUtil.inflate<FragmentScheduleBinding>(
             layoutInflater,
             R.layout.fragment_schedule,
@@ -34,12 +44,16 @@ class ScheduleFragment : Fragment() {
 
         setupUI(binding)
         bind(binding)
+        observe()
+
+        viewModel.getTrackEventList()
 
         return binding.root
     }
 
     private fun setupUI(binding: FragmentScheduleBinding) {
-        binding.scheduleRecyclerView.adapter = ScheduleListAdapter()
+        scheduleListAdapter = ScheduleListAdapter(viewLifecycleOwner, viewModel)
+        binding.scheduleRecyclerView.adapter = scheduleListAdapter
     }
 
     private fun bind(binding: FragmentScheduleBinding) {
@@ -48,6 +62,12 @@ class ScheduleFragment : Fragment() {
                 toCreateTrackEvent()
             }
         }
+    }
+
+    private fun observe() {
+        viewModel.trackEventList.observe(viewLifecycleOwner, Observer {
+            scheduleListAdapter.notifyItemRangeChanged(0, it.size)
+        })
     }
 
     private fun toCreateTrackEvent() {

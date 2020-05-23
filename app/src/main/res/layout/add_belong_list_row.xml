@@ -2,10 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+        <variable
+            name="position"
+            type="Integer" />
 
         <variable
             name="viewModel"
-            type="app.imuuzak.driving_management.ui.schedule.viewmodel.BelongingsListItemViewModel" />
+            type="app.imuuzak.driving_management.ui.schedule.viewmodel.CreateTrackEventViewModel" />
 
     </data>
 
@@ -20,7 +23,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@={viewModel.name}"
+            android:text="@={viewModel.belongingNames[position]}"
             android:inputType="text"
             android:maxLines="1"
             android:hint="@string/hint_belonging"
@@ -32,7 +35,7 @@
             android:layout_height="wrap_content"
             android:clickable="true"
             android:focusable="true"
-            android:onClick="@{() -> viewModel.uiEvent.onClickRemove()}"
+            android:onClick="@{() -> viewModel.removeBelonging(position)}"
             android:src="@android:drawable/ic_menu_close_clear_cancel" />
     </LinearLayout>
 </layout>

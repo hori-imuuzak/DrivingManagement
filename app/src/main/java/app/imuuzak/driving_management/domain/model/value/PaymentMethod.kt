@@ -1,6 +1,9 @@
 package app.imuuzak.driving_management.domain.model.value
 
 enum class PaymentMethod {
+    NONE {
+        override fun value() = -1
+    },
     // カード払い
     CARD {
         override fun value() = 10
@@ -27,4 +30,18 @@ enum class PaymentMethod {
     };
 
     abstract fun value(): Int
+
+    companion object {
+        fun fromValue(value: Int): PaymentMethod {
+           return when(value) {
+                CARD.value() -> CARD
+                BANK.value() -> BANK
+                PAYMENT_SERVICE.value() -> PAYMENT_SERVICE
+                CONVENIENCE_STORE.value() -> CONVENIENCE_STORE
+                LOCAL.value() -> LOCAL
+                OTHER.value() -> OTHER
+                else -> NONE
+            }
+        }
+    }
 }

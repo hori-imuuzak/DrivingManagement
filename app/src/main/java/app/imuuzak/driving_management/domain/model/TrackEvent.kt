@@ -1,6 +1,7 @@
 package app.imuuzak.driving_management.domain.model
 
 import app.imuuzak.driving_management.domain.model.value.PaymentMethod
+import app.imuuzak.driving_management.domain.model.value.PaymentStatus
 import app.imuuzak.driving_management.domain.model.value.Schedule
 import app.imuuzak.driving_management.domain.model.value.Time
 
@@ -26,6 +27,8 @@ data class TrackEvent(
     var price: Int?,
     // 支払い方法
     var paymentMethod: PaymentMethod? = null,
+    // 支払いステータス
+    var paymentStatus: PaymentStatus? = PaymentStatus.YET,
     // 支払い期限
     var paymentDeadline: Schedule? = Schedule()
 ) {

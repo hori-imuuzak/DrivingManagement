@@ -2,6 +2,7 @@ package app.imuuzak.driving_management.di.component
 
 import app.imuuzak.driving_management.di.module.*
 import app.imuuzak.driving_management.ui.circuit.activity.CreateCircuitActivity
+import app.imuuzak.driving_management.ui.home.fragment.ScheduleFragment
 import app.imuuzak.driving_management.ui.organizer.activity.CreateOrganizerActivity
 import app.imuuzak.driving_management.ui.schedule.activity.CreateTrackEventActivity
 import dagger.Component
@@ -12,6 +13,7 @@ import javax.inject.Singleton
     modules = [
         ApplicationModule::class,
         ViewModelFactoryModule::class,
+        ScheduleViewModelModule::class,
         CreateTrackEventViewModelModule::class,
         CreateCircuitViewModelModule::class,
         CreateOrganizerViewModelModule::class,
@@ -29,6 +31,7 @@ interface AppComponent {
         ): AppComponent
     }
 
+    fun inject(fragment: ScheduleFragment)
     fun inject(activity: CreateTrackEventActivity)
     fun inject(activity: CreateCircuitActivity)
     fun inject(activity: CreateOrganizerActivity)

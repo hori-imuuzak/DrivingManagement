@@ -18,7 +18,6 @@ import app.imuuzak.driving_management.domain.repository.ResourceState
 import app.imuuzak.driving_management.ui.circuit.activity.CreateCircuitActivity
 import app.imuuzak.driving_management.ui.organizer.activity.CreateOrganizerActivity
 import app.imuuzak.driving_management.ui.schedule.adapter.BelongingsListAdapter
-import app.imuuzak.driving_management.ui.schedule.viewmodel.BelongingsListItemViewModel
 import app.imuuzak.driving_management.ui.schedule.viewmodel.CreateTrackEventViewModel
 import com.google.android.material.snackbar.Snackbar
 import java.util.*
@@ -56,7 +55,7 @@ class CreateTrackEventActivity : AppCompatActivity() {
     }
 
     private fun setupUI(binding: ActivityCreateTrackEventBinding) {
-        belongingsListAdapter = BelongingsListAdapter()
+        belongingsListAdapter = BelongingsListAdapter(this, viewModel)
         binding.belongingsRecyclerView.adapter = belongingsListAdapter
     }
 
@@ -78,20 +77,9 @@ class CreateTrackEventActivity : AppCompatActivity() {
             }
 
             override fun onClickCreateBelonging() {
-                val belongingsListViewModel =
-                    ViewModelProvider(this@CreateTrackEventActivity).get(BelongingsListItemViewModel::class.java)
-                belongingsListViewModel.setBelonging(Belonging("sample", 1))
-                belongingsListViewModel.uiEvent = object: BelongingsListItemViewModel.UIEvent {
-                    override fun onClickRemove() {
-                        val removedAt = belongingsListAdapter.removeBelonging(belongingsListViewModel)
-                        belongingsListAdapter.notifyItemRemoved(removedAt)
-                        viewModel.removeBelonging()
-                    }
-                }
-
-                belongingsListAdapter.addBelonging(belongingsListViewModel)
-                belongingsListAdapter.notifyItemInserted(belongingsListAdapter.itemCount - 1)
-                viewModel.addBelonging()
+                val count = viewModel.addBelonging(Belonging("", 1))
+                // 末尾追加なのでcountをpositionに指定する
+                // belongingsListAdapter.notifyItemInserted(count)
             }
 
             override fun onClickMeetingDate() {
@@ -119,7 +107,7 @@ class CreateTrackEventActivity : AppCompatActivity() {
             }
 
             override fun onClickCreate() {
-                viewModel.createTrackEvent(belongingsListAdapter.belongingsListItemViewModels)
+                viewModel.createTrackEvent()
             }
         }
     }
@@ -131,6 +119,10 @@ class CreateTrackEventActivity : AppCompatActivity() {
 
         viewModel.loadOrganizerList().observe(this, Observer {
             viewModel.setOrganizerList(it)
+        })
+
+        viewModel.belongingNames.observe(this, Observer {
+            belongingsListAdapter.notifyDataSetChanged()
         })
 
         viewModel.createdTrackEventResource.observe(this, Observer {

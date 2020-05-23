@@ -121,15 +121,27 @@ class CreateTrackEventViewModel @Inject constructor(
         }
     }
 
-    // 持ち物リストの個数
-    var belongingsCount = MutableLiveData<Int>().apply { value = 0 }
+    // 持ち物リスト
+    var belongingNames = MutableLiveData<MutableList<String>>().apply { value = mutableListOf() }
 
-    fun addBelonging() {
-        belongingsCount.value = belongingsCount.value?.plus(1)
+    fun addBelonging(belonging: Belonging): Int {
+        belongingNames.value?.add("")
+
+        belongingNames.value = belongingNames.value
+
+        return belongingNames.value?.size ?: 0
     }
 
-    fun removeBelonging() {
-        belongingsCount.value = belongingsCount.value?.minus(1)
+    fun removeBelonging(position: Int): Int {
+        belongingNames.value?.removeAt(position)
+
+        belongingNames.value = belongingNames.value
+
+        return belongingNames.value?.size ?: 0
+    }
+
+    val belongingsCount = Transformations.map(belongingNames) {
+        it.size
     }
 
     // 開催日
@@ -202,7 +214,7 @@ class CreateTrackEventViewModel @Inject constructor(
     private val _createdTrackEventResource = MutableLiveData<ResourceState<TrackEvent>>()
     val createdTrackEventResource = _createdTrackEventResource
 
-    fun createTrackEvent(belongings: List<BelongingsListItemViewModel>) {
+    fun createTrackEvent() {
         viewModelScope.launch {
             _createdTrackEventResource.value = ResourceState.loading()
 
@@ -210,9 +222,9 @@ class CreateTrackEventViewModel @Inject constructor(
                 val trackEvent = TrackEvent(
                     circuit = _selectedCircuit.value,
                     organizer = _selectedOrganizer.value,
-                    belongings = belongings.map {
-                        Belonging(it.name, 1)
-                    },
+                    belongings = belongingNames.value?.map {
+                        Belonging(it, 1)
+                    } ?: listOf(),
                     date = Schedule(
                         begin = meetingDate.value,
                         end = meetingDate.value

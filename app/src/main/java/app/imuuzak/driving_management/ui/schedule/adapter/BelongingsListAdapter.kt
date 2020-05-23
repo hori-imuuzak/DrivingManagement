@@ -3,27 +3,20 @@ package app.imuuzak.driving_management.ui.schedule.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import app.imuuzak.driving_management.R
 import app.imuuzak.driving_management.databinding.AddBelongListRowBinding
-import app.imuuzak.driving_management.ui.schedule.viewmodel.BelongingsListItemViewModel
+import app.imuuzak.driving_management.ui.schedule.viewmodel.CreateTrackEventViewModel
 
-class BelongingsListAdapter(belongingsListItemViewModels: List<BelongingsListItemViewModel> = listOf()) :
+class BelongingsListAdapter(
+    private val lifecycleOwner: LifecycleOwner,
+    private val createTrackEventViewModel: CreateTrackEventViewModel
+) :
     RecyclerView.Adapter<BelongingsListAdapter.Companion.ViewHolder>() {
 
-    val belongingsListItemViewModels = belongingsListItemViewModels.toMutableList()
-
-    fun addBelonging(viewModel: BelongingsListItemViewModel) {
-        belongingsListItemViewModels.add(viewModel)
-    }
-    fun removeBelonging(viewModel: BelongingsListItemViewModel): Int {
-        val removedAt = belongingsListItemViewModels.indexOf(viewModel)
-        belongingsListItemViewModels.remove(viewModel)
-        return removedAt
-    }
-
     override fun getItemCount(): Int {
-        return belongingsListItemViewModels.size
+        return createTrackEventViewModel.belongingsCount.value ?: 0
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -33,11 +26,16 @@ class BelongingsListAdapter(belongingsListItemViewModels: List<BelongingsListIte
             parent,
             false
         )
+
+        binding.lifecycleOwner = lifecycleOwner
+        binding.viewModel = createTrackEventViewModel
+
         return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.binding.viewModel = belongingsListItemViewModels[position]
+        holder.binding.position = position
+        holder.binding.executePendingBindings()
     }
 
     companion object {

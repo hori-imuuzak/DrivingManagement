@@ -49,6 +49,10 @@ data class FirebaseTrackEventEntity(
     @PropertyName("payment_method")
     var paymentMethod: Int? = null,
 
+    // 支払いステータス
+    @PropertyName("payment_status")
+    var paymentStatus: Int? = null,
+
     // 支払い期限
     @PropertyName("payment_deadline")
     var paymentDeadline: Date? = null
@@ -69,10 +73,13 @@ data class FirebaseTrackEventEntity(
                 dateStart = model.date?.begin,
                 dateEnd = model.date?.end,
                 meetingTimeHour = model.meetingTime?.hour,
-                dismissalTimeMinute = model.meetingTime?.minute,
+                meetingTimeMinute = model.meetingTime?.minute,
+                dismissalTimeHour = model.dismissalTime?.hour,
+                dismissalTimeMinute = model.dismissalTime?.minute,
                 precautions = model.precautions ?: "",
                 price = model.price ?: 0,
                 paymentMethod = model.paymentMethod?.value(),
+                paymentStatus = model.paymentStatus?.value(),
                 paymentDeadline = model.paymentDeadline?.begin
             )
         }
