@@ -9,6 +9,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
+import androidx.navigation.fragment.findNavController
 import app.imuuzak.driving_management.DrivingManagementApp
 import app.imuuzak.driving_management.R
 import app.imuuzak.driving_management.databinding.FragmentScheduleBinding
@@ -54,6 +56,14 @@ class ScheduleFragment @Inject constructor() : Fragment() {
     private fun setupUI(binding: FragmentScheduleBinding) {
         scheduleListAdapter = ScheduleListAdapter(viewLifecycleOwner, viewModel)
         binding.scheduleRecyclerView.adapter = scheduleListAdapter
+
+        viewModel.uiEvent = object : ScheduleViewModel.UIEvent {
+            override fun onClickSchedule(position: Int) {
+                viewModel.trackEventAt(position).observe(viewLifecycleOwner) {
+                    findNavController().navigate(ScheduleFragmentDirections.actionNavigationScheduleToScheduleDetailFragment(it))
+                }
+            }
+        }
     }
 
     private fun bind(binding: FragmentScheduleBinding) {

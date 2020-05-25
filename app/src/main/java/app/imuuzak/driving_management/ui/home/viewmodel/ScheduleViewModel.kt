@@ -8,8 +8,6 @@ import app.imuuzak.driving_management.domain.model.value.Pagination
 import app.imuuzak.driving_management.domain.model.value.PaymentStatus
 import app.imuuzak.driving_management.domain.repository.TrackEventRepository
 import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
-import java.util.*
 import javax.inject.Inject
 
 class ScheduleViewModel @Inject constructor(
@@ -21,16 +19,7 @@ class ScheduleViewModel @Inject constructor(
 
     fun dateText(position: Int): LiveData<String> = Transformations.map(_trackEventList) {
         val event = it[position]
-        var text = ""
-        event.date?.let { schedule ->
-            if (schedule.begin?.equals(schedule.end) == true && schedule.end != null) {
-                text = "${df.format(schedule.begin)} ${tf.format(schedule.begin)}~${tf.format(schedule.end)}"
-            } else if (schedule.begin != null && schedule.end != null) {
-                text = "${df.format(schedule.begin)}~${df.format(schedule.end)}"
-            }
-        }
-
-        text
+        event.date?.dateRangeText()
     }
 
     fun placeText(position: Int) =
@@ -54,11 +43,12 @@ class ScheduleViewModel @Inject constructor(
 
     fun paymentDeadlineText(position: Int) =
         Transformations.map(_trackEventList) {
-            it[position].paymentDeadline?.begin?.let { date ->
-                df.format(date)
-            } ?: ""
+            it[position].paymentDeadline?.beginText()
         }
 
+    fun trackEventAt(position: Int) = Transformations.map(_trackEventList) {
+        it[position]
+    }
 
     fun getTrackEventList() {
         viewModelScope.launch {
@@ -66,6 +56,8 @@ class ScheduleViewModel @Inject constructor(
         }
     }
 
-    private val df = SimpleDateFormat("yyyy/MM/dd", Locale.JAPAN)
-    private val tf = SimpleDateFormat("hh:mm", Locale.JAPAN)
+    var uiEvent: UIEvent? = null
+    interface UIEvent {
+        fun onClickSchedule(position: Int)
+    }
 }

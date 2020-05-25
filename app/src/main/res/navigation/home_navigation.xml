@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_schedule">
+
+    <fragment
+        android:id="@+id/navigation_schedule"
+        android:name="app.imuuzak.driving_management.ui.home.fragment.ScheduleFragment"
+        android:label="@string/title_schedule"
+        tools:layout="@layout/fragment_schedule" >
+        <action
+            android:id="@+id/action_navigation_schedule_to_scheduleDetailFragment"
+            app:destination="@id/scheduleDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_record"
+        android:name="app.imuuzak.driving_management.ui.home.fragment.RecordFragment"
+        android:label="@string/title_record"
+        tools:layout="@layout/fragment_record" />
+
+    <fragment
+        android:id="@+id/navigation_car_management"
+        android:name="app.imuuzak.driving_management.ui.home.fragment.CarManagementFragment"
+        android:label="@string/title_car_management"
+        tools:layout="@layout/fragment_car_management" />
+
+    <fragment
+        android:id="@+id/navigation_setting"
+        android:name="app.imuuzak.driving_management.ui.home.fragment.SettingFragment"
+        android:label="@string/title_setting"
+        tools:layout="@layout/fragment_setting" />
+
+    <fragment
+        android:id="@+id/scheduleDetailFragment"
+        android:name="app.imuuzak.driving_management.ui.schedule.fragment.ScheduleDetailFragment"
+        android:label="@string/title_schedule_detail"
+        tools:layout="@layout/fragment_schedule_detail" >
+        <argument
+            android:name="trackEvent"
+            app:argType="app.imuuzak.driving_management.domain.model.TrackEvent" />
+    </fragment>
+</navigation>

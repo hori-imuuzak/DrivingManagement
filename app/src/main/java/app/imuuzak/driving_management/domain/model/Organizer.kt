@@ -1,6 +1,7 @@
 package app.imuuzak.driving_management.domain.model
 
 import android.util.Patterns
+import java.io.Serializable
 import java.lang.IllegalArgumentException
 
 /**
@@ -19,13 +20,13 @@ class Organizer(
     val email: String = "",
     // 振込先
     val bankAccount: List<BankAccount> = listOf()
-) {
+) : Serializable {
     init {
         if (name.isEmpty()) {
             throw IllegalArgumentException("name")
         }
 
-        if (kana.isEmpty() or kana.matches("^[\\u30A0-\\u30FF]+$".toRegex()).not()) {
+        if (kana.isEmpty() || kana.matches("^[\\u30A0-\\u30FF]+$".toRegex()).not()) {
             throw IllegalArgumentException("kana")
         }
 

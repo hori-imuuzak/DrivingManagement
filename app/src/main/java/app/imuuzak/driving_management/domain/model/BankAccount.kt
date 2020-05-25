@@ -1,6 +1,7 @@
 package app.imuuzak.driving_management.domain.model
 
 import app.imuuzak.driving_management.domain.model.value.AccountType
+import java.io.Serializable
 
 /**
  * 銀行口座
@@ -18,4 +19,4 @@ class BankAccount(
     val holderName: String,
     // 口座番号
     val accountNumber: String
-)
+) : Serializable

@@ -22,6 +22,7 @@
         android:clickable="true"
         android:elevation="@dimen/medium"
         android:focusable="true"
+        android:onClick="@{() -> viewModel.uiEvent.onClickSchedule(position)}"
         android:foreground="?android:attr/selectableItemBackground">
 
         <LinearLayout
@@ -116,7 +117,7 @@
                     <include
                         layout="@layout/icon_label"
                         bind:icon="@{@android:drawable/ic_menu_month}"
-                        bind:text="@{@string/payment_status}" />
+                        bind:text="@{@string/application_info}" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"

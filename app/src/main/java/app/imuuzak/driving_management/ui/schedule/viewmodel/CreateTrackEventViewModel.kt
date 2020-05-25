@@ -15,8 +15,8 @@ import app.imuuzak.driving_management.domain.repository.CircuitRepository
 import app.imuuzak.driving_management.domain.repository.OrganizerRepository
 import app.imuuzak.driving_management.domain.repository.ResourceState
 import app.imuuzak.driving_management.domain.repository.TrackEventRepository
+import app.imuuzak.driving_management.domain.service.FormatService
 import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
@@ -148,7 +148,9 @@ class CreateTrackEventViewModel @Inject constructor(
     private val meetingDate = MutableLiveData<Date>().apply {
         value = Date()
     }
-    val meetingDateText: LiveData<String> = Transformations.map(meetingDate) { df.format(it) }
+    val meetingDateText: LiveData<String> =
+        Transformations.map(meetingDate) { FormatService.dateFormat(it) }
+
     fun setMeetingDate(year: Int, month: Int, day: Int) {
         meetingDate.value = getDate(year, month, day)
     }
@@ -204,7 +206,7 @@ class CreateTrackEventViewModel @Inject constructor(
     // 支払い期限
     private val paymentDeadline = MutableLiveData<Date>().apply { value = Date() }
     val paymentDeadlineText: LiveData<String> =
-        Transformations.map(paymentDeadline) { df.format(it) }
+        Transformations.map(paymentDeadline) { FormatService.dateFormat(it) }
 
     fun setPaymentDeadline(year: Int, month: Int, day: Int) {
         paymentDeadline.value = getDate(year, month, day)
@@ -248,7 +250,6 @@ class CreateTrackEventViewModel @Inject constructor(
         }
     }
 
-    private val df = SimpleDateFormat("yyyy/MM/dd", Locale.JAPAN)
     private fun getDate(year: Int, month: Int, day: Int): Date {
         return Calendar.getInstance().apply {
             set(Calendar.YEAR, year)

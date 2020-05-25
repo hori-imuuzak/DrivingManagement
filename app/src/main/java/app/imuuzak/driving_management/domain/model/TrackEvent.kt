@@ -4,6 +4,8 @@ import app.imuuzak.driving_management.domain.model.value.PaymentMethod
 import app.imuuzak.driving_management.domain.model.value.PaymentStatus
 import app.imuuzak.driving_management.domain.model.value.Schedule
 import app.imuuzak.driving_management.domain.model.value.Time
+import app.imuuzak.driving_management.domain.service.FormatService
+import java.io.Serializable
 
 /**
  * 走行会
@@ -31,7 +33,7 @@ data class TrackEvent(
     var paymentStatus: PaymentStatus? = PaymentStatus.YET,
     // 支払い期限
     var paymentDeadline: Schedule? = Schedule()
-) {
+) : Serializable {
     init {
         if (circuit == null) {
             throw IllegalArgumentException("circuit")
@@ -49,4 +51,14 @@ data class TrackEvent(
             throw IllegalArgumentException("price")
         }
     }
+
+    fun scheduleTimeText(): String {
+        return if (date?.isSameBeginEnd() == true && meetingTime != null && dismissalTime != null) {
+            FormatService.timeRangeFormat(meetingTime!!, dismissalTime!!)
+        } else {
+            date?.dateRangeText() ?: ""
+        }
+    }
+
+    fun priceText() = FormatService.priceFormat(price ?: 0)
 }

@@ -1,6 +1,7 @@
 package app.imuuzak.driving_management.domain.model
 
 import android.webkit.URLUtil
+import java.io.Serializable
 import java.lang.IllegalArgumentException
 
 /**
@@ -13,17 +14,17 @@ data class Circuit(
     val kana: String = "",
     // URL
     val url: String = ""
-) {
+) : Serializable {
     init {
         if (name.isEmpty()) {
             throw IllegalArgumentException("name")
         }
 
-        if (kana.isEmpty() or kana.matches("^[\\u30A0-\\u30FF]+$".toRegex()).not()) {
+        if (kana.isEmpty() || kana.matches("^[\\u30A0-\\u30FF]+$".toRegex()).not()) {
             throw IllegalArgumentException("kana")
         }
 
-        if (url.isNotEmpty() and URLUtil.isValidUrl(url).not()) {
+        if (url.isNotEmpty() && URLUtil.isValidUrl(url).not()) {
             throw IllegalArgumentException("url")
         }
     }

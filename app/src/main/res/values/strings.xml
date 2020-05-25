@@ -6,15 +6,18 @@
     <string name="title_record">レコード</string>
     <string name="title_car_management">メンテナンス</string>
     <string name="title_setting">設定</string>
+    <string name="title_schedule_detail">走行スケジュール確認</string>
 
     <string name="schedule_date">開催日時</string>
     <string name="place">場所</string>
     <string name="has_precautions">注意事項の記載あり</string>
-    <string name="payment_status">支払い状況</string>
+    <string name="application_info">申込状況</string>
     <string name="weather">天気予報</string>
     <string name="temperature">予想気温</string>
 
     <string name="create_track_event">走行会イベントの作成</string>
+    <string name="create_record">レコードの作成</string>
+
     <string name="holding_circuit">開催サーキット</string>
     <string name="add_circuit">サーキットを新しく追加する</string>
     <string name="hint_circuit_name">富士スピードウェイ</string>
@@ -64,6 +67,11 @@
     <string name="date_pick">日付を選択する</string>
     <string name="create">作成する</string>
 
+    <string name="about_the_day">当日について</string>
+    <string name="weather_news">天気予報</string>
+    <string name="access">アクセス</string>
+    <string name="open_map_app">地図アプリで確認する</string>
+
     <string name="name">名前</string>
     <string name="name_kana">名前（カナ）</string>
     <string name="url">URL</string>
@@ -77,6 +85,9 @@
     <string name="payee_bank_holder_name">振込先名称</string>
     <string name="payee_bank_account_number">口座番号</string>
 
+    <string name="text_limit">%1$sまで</string>
+
     <string name="success_create">作成しました。</string>
     <string name="error_create">作成に失敗しました。時間をおいて再度お試しください。</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

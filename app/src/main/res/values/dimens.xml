@@ -6,9 +6,11 @@
     <dimen name="large">24dp</dimen>
     <dimen name="huge">32dp</dimen>
 
+    <dimen name="floating">16dp</dimen>
+
     <dimen name="h1">28sp</dimen>
-    <dimen name="h2">26sp</dimen>
-    <dimen name="h3">20sp</dimen>
+    <dimen name="h2">22sp</dimen>
+    <dimen name="h3">16sp</dimen>
     <dimen name="textNormal">14sp</dimen>
 
     <!-- Default screen margins, per the Android Design guidelines. -->
