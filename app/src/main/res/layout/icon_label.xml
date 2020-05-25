@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <import type="android.view.View" />
 
         <variable
-            name="icon"
-            type="android.graphics.drawable.Drawable" />
+            name="type"
+            type="String" />
 
         <variable
             name="text"
@@ -17,17 +18,57 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_marginEnd="@dimen/tiny"
-            android:src="@{icon}" />
+            android:src="@mipmap/calendar"
+            android:tint="@android:color/darker_gray"
+            android:tintMode="multiply"
+            android:visibility='@{type == "calendar" ? View.VISIBLE : View.GONE}'
+            tools:src="@mipmap/calendar"
+            tools:visibility="visible" />
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="@dimen/tiny"
+            android:src="@mipmap/marker"
+            android:tint="@android:color/darker_gray"
+            android:tintMode="multiply"
+            android:visibility='@{type == "marker" ? View.VISIBLE : View.GONE}'
+            tools:src="@mipmap/marker"
+            tools:visibility="visible" />
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="@dimen/tiny"
+            android:src="@mipmap/group"
+            android:tint="@android:color/darker_gray"
+            android:tintMode="multiply"
+            android:visibility='@{type == "group" ? View.VISIBLE : View.GONE}'
+            tools:src="@mipmap/group"
+            tools:visibility="visible" />
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="@dimen/tiny"
+            android:src="@mipmap/note"
+            android:tint="@android:color/darker_gray"
+            android:tintMode="multiply"
+            android:visibility='@{type == "note" ? View.VISIBLE : View.GONE}'
+            tools:src="@mipmap/note"
+            tools:visibility="visible" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{text}" />
+            android:text="@{text}"
+            tools:text="開催日時" />
     </LinearLayout>
 </layout>

@@ -3,10 +3,12 @@ package app.imuuzak.driving_management.di.module
 import app.imuuzak.driving_management.domain.repository.CircuitRepository
 import app.imuuzak.driving_management.domain.repository.OrganizerRepository
 import app.imuuzak.driving_management.domain.repository.TrackEventRepository
+import app.imuuzak.driving_management.domain.repository.WeatherRepository
 import app.imuuzak.driving_management.infrastructure.database.AppDatabase
 import app.imuuzak.driving_management.infrastructure.repository.CircuitRepositoryImpl
 import app.imuuzak.driving_management.infrastructure.repository.OrganizerRepositoryImpl
 import app.imuuzak.driving_management.infrastructure.repository.TrackEventRepositoryImpl
+import app.imuuzak.driving_management.infrastructure.repository.WeatherRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -30,5 +32,11 @@ class RepositoryModule {
     @Singleton
     fun provideTrackEventRepository(): TrackEventRepository {
         return TrackEventRepositoryImpl()
+    }
+
+    @Provides
+    @Singleton
+    fun provideWeatherRepository(database: AppDatabase): WeatherRepository {
+        return WeatherRepositoryImpl(database)
     }
 }

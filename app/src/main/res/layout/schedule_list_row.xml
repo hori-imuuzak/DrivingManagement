@@ -22,12 +22,13 @@
         android:clickable="true"
         android:elevation="@dimen/medium"
         android:focusable="true"
-        android:onClick="@{() -> viewModel.uiEvent.onClickSchedule(position)}"
-        android:foreground="?android:attr/selectableItemBackground">
+        android:foreground="?android:attr/selectableItemBackground"
+        android:onClick="@{() -> viewModel.uiEvent.onClickSchedule(position)}">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@android:color/white"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -45,15 +46,15 @@
 
                     <include
                         layout="@layout/icon_label"
-                        bind:icon="@{@android:drawable/ic_menu_month}"
-                        bind:text="@{@string/schedule_date}" />
+                        bind:text="@{@string/schedule_date}"
+                        bind:type='@{"calendar"}' />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/medium"
-                        android:textStyle="bold"
-                        android:text="@{viewModel.dateText(position)}" />
+                        android:text="@{viewModel.dateText(position)}"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <!-- // 場所 -->
@@ -65,15 +66,15 @@
 
                     <include
                         layout="@layout/icon_label"
-                        bind:icon="@{@android:drawable/ic_menu_month}"
-                        bind:text="@{@string/place}" />
+                        bind:text="@{@string/place}"
+                        bind:type='@{"marker"}' />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/medium"
-                        android:textStyle="bold"
-                        android:text="@{viewModel.placeText(position)}" />
+                        android:text="@{viewModel.placeText(position)}"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <!-- // 主催者 -->
@@ -85,15 +86,15 @@
 
                     <include
                         layout="@layout/icon_label"
-                        bind:icon="@{@android:drawable/ic_menu_month}"
-                        bind:text="@{@string/organizer}" />
+                        bind:text="@{@string/organizer}"
+                        bind:type='@{"group"}' />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/medium"
-                        android:textStyle="bold"
-                        android:text="@{viewModel.organizerText(position)}" />
+                        android:text="@{viewModel.organizerText(position)}"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <!-- // 注意事項 -->
@@ -116,8 +117,8 @@
 
                     <include
                         layout="@layout/icon_label"
-                        bind:icon="@{@android:drawable/ic_menu_month}"
-                        bind:text="@{@string/application_info}" />
+                        bind:text="@{@string/application_info}"
+                        bind:type='@{"note"}' />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -128,8 +129,8 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:text="@{viewModel.paymentStatusText(position)}" />
+                            android:text="@{viewModel.paymentStatusText(position)}"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -144,52 +145,88 @@
             <LinearLayout
                 android:layout_width="120dp"
                 android:layout_height="match_parent"
-                android:background="@color/colorPrimary"
-                android:orientation="vertical"
-                android:padding="@dimen/medium">
+                android:orientation="vertical">
 
-                <LinearLayout
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:layout_height="match_parent">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/weather"
-                        android:textColor="@android:color/white" />
-
-                    <TextView
+                    <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="晴れ"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/h2" />
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/clear" />
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/temperature"
-                        android:textColor="@android:color/white" />
-
-                    <TextView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="26℃"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/h2" />
-                </LinearLayout>
+                        android:orientation="vertical"
+                        android:padding="@dimen/medium">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:shadowColor="@android:color/black"
+                                android:shadowRadius="5"
+                                android:text="@string/weather"
+                                android:textColor="@android:color/white" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:shadowColor="@android:color/black"
+                                android:shadowRadius="5"
+                                android:text="晴れ"
+                                android:textColor="@android:color/white"
+                                android:textSize="@dimen/h2" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:shadowColor="@android:color/black"
+                                android:shadowRadius="5"
+                                android:text="@string/temperature"
+                                android:textColor="@android:color/white" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:shadowColor="@android:color/black"
+                                android:shadowRadius="5"
+                                android:text="5℃"
+                                android:textColor="@android:color/white"
+                                android:textSize="@dimen/h2" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:shadowColor="@android:color/black"
+                                android:shadowRadius="5"
+                                android:text="26℃"
+                                android:textColor="@android:color/white"
+                                android:textSize="@dimen/h2" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </FrameLayout>
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>

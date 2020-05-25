@@ -1,4 +1,4 @@
-package app.imuuzak.driving_management.ui.home.viewmodel
+package app.imuuzak.driving_management.ui.schedule.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.*

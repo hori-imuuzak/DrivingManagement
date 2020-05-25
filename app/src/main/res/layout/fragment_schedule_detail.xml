@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="app.imuuzak.driving_management.ui.home.viewmodel.ScheduleDetailViewModel" />
+            type="app.imuuzak.driving_management.ui.schedule.viewmodel.ScheduleDetailViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -225,6 +225,7 @@
             android:layout_marginBottom="@dimen/floating"
             android:clickable="true"
             android:focusable="true"
+            android:src="@mipmap/checker"
             android:tooltipText="@string/create_record" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

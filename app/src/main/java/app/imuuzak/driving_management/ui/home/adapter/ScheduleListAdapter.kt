@@ -14,7 +14,7 @@ class ScheduleListAdapter(
     private val scheduleViewModel: ScheduleViewModel
 ) : RecyclerView.Adapter<ScheduleListAdapter.ViewHolder>() {
 
-    override fun getItemCount() = scheduleViewModel.trackEventList?.value?.size ?: 0
+    override fun getItemCount() = scheduleViewModel.trackEventList.value?.size ?: 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = DataBindingUtil.inflate<ScheduleListRowBinding>(
@@ -32,6 +32,7 @@ class ScheduleListAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.position = position
+        scheduleViewModel.getWeather(position)
         holder.binding.executePendingBindings()
     }
 

@@ -7,7 +7,6 @@ import app.imuuzak.driving_management.infrastructure.repository.entity.FirebaseT
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.tasks.await
-import java.util.*
 
 class TrackEventRepositoryImpl : TrackEventRepository {
     override suspend fun get(pagination: Pagination): List<TrackEvent> {

@@ -12,7 +12,7 @@ import app.imuuzak.driving_management.DrivingManagementApp
 import app.imuuzak.driving_management.R
 import app.imuuzak.driving_management.databinding.FragmentScheduleDetailBinding
 import app.imuuzak.driving_management.di.ViewModelFactory
-import app.imuuzak.driving_management.ui.home.viewmodel.ScheduleDetailViewModel
+import app.imuuzak.driving_management.ui.schedule.viewmodel.ScheduleDetailViewModel
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
 import javax.inject.Inject
