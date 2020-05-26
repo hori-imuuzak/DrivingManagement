@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "2ebd6759cf409666eb3da9098d5e796a",
+    "identityHash": "e97637bc3a8a64ec5f550b4961492707",
     "entities": [
       {
         "tableName": "circuits",
@@ -162,11 +162,17 @@
       },
       {
         "tableName": "weathers",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `lat` REAL, `lng` REAL, `zip_code` TEXT, `temp` REAL, `max_temp` REAL, `min_temp` REAL, `pressure` REAL, `humidity` REAL, `clouds` INTEGER, `wind_speed` REAL, `wind_direction` REAL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `type` INTEGER NOT NULL, `lat` REAL, `lng` REAL, `zip_code` TEXT, `temp` REAL, `max_temp` REAL, `min_temp` REAL, `pressure` REAL, `humidity` REAL, `clouds` INTEGER, `wind_speed` REAL, `wind_direction` REAL)",
         "fields": [
           {
             "fieldPath": "id",
             "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "type",
+            "columnName": "type",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -250,7 +256,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '2ebd6759cf409666eb3da9098d5e796a')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e97637bc3a8a64ec5f550b4961492707')"
     ]
   }
 }

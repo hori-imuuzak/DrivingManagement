@@ -4,11 +4,15 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import app.imuuzak.driving_management.domain.model.Weather
+import app.imuuzak.driving_management.domain.model.value.WeatherType
 
 @Entity(tableName = "weathers")
 data class WeatherEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
+
+    @ColumnInfo(name = "type")
+    val type: Int,
 
     // 座標
     @ColumnInfo(name = "lat")
@@ -51,6 +55,7 @@ data class WeatherEntity(
     val windDirection: Double? = null
 ) {
     fun toWeather() = Weather(
+        type = WeatherType.fromValue(this.type),
         lat = this.lat,
         lng = this.lng,
         zipCode = this.zipCode,
@@ -68,6 +73,7 @@ data class WeatherEntity(
         fun fromWeather(model: Weather): WeatherEntity {
             return WeatherEntity(
                 id = 0,
+                type = model.type.value(),
                 lat = model.lat,
                 lng = model.lng,
                 zipCode = model.zipCode,

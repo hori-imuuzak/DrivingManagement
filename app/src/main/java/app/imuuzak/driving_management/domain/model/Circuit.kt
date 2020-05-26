@@ -20,7 +20,7 @@ data class Circuit(
             throw IllegalArgumentException("name")
         }
 
-        if (kana.isEmpty() || kana.matches("^[\\u30A0-\\u30FF]+$".toRegex()).not()) {
+        if (kana.isEmpty() && kana.matches("^[\\u30A0-\\u30FF]+$".toRegex()).not()) {
             throw IllegalArgumentException("kana")
         }
 

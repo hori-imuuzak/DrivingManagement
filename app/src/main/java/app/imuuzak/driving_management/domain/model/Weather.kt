@@ -1,8 +1,11 @@
 package app.imuuzak.driving_management.domain.model
 
+import app.imuuzak.driving_management.domain.model.value.WeatherType
 import java.io.Serializable
 
 data class Weather(
+    val type: WeatherType,
+
     // 座標
     val lat: Double? = null,
     val lng: Double? = null,
