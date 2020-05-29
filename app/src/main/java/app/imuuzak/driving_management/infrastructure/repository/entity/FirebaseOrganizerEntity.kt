@@ -5,27 +5,21 @@ import com.google.firebase.firestore.PropertyName
 
 data class FirebaseOrganizerEntity(
     // 名称
-    @PropertyName("name")
     val name: String = "",
 
     // 名前（カナ）
-    @PropertyName("kana")
     val kana: String = "",
 
     // 代表者名
-    @PropertyName("representative_name")
     val representativeName: String = "",
 
     // 電話番号
-    @PropertyName("phone_number")
     val phoneNumber: String = "",
 
     // メールアドレス
-    @PropertyName("email")
     val email: String = "",
 
     // 支払い先
-    @PropertyName("bank_account")
     val bankAccount: List<FirebaseBankAccountEntity>? = null
 ) {
     companion object {

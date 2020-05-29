@@ -8,53 +8,39 @@ import java.util.*
 
 data class FirebaseTrackEventEntity(
     // 開催サーキット
-    @PropertyName("circuit")
     var circuit: FirebaseCircuitEntity? = null,
 
     // 主催者
-    @PropertyName("organizer")
     var organizer: FirebaseOrganizerEntity? = null,
 
     // 持ち物
-    @PropertyName("belongings")
     var belongings: List<FirebaseBelongingEntity>? = null,
 
     // 開催日程
-    @PropertyName("date_start")
     var dateStart: Date? = null,
-    @PropertyName("date_end")
     var dateEnd: Date? = null,
 
     // 集合時間
-    @PropertyName("meeting_time_hour")
     var meetingTimeHour: Int? = null,
-    @PropertyName("meeting_time_minute")
     var meetingTimeMinute: Int? = null,
 
     // 解散時間
-    @PropertyName("dismissal_time_hour")
     var dismissalTimeHour: Int? = null,
-    @PropertyName("dismissal_time_minute")
     var dismissalTimeMinute: Int? = null,
 
     // 注意事項
-    @PropertyName("precautions")
     var precautions: String? = "",
 
     // 料金
-    @PropertyName("price")
     var price: Int? = 0,
 
     // 支払い方法
-    @PropertyName("payment_method")
     var paymentMethod: Int? = null,
 
     // 支払いステータス
-    @PropertyName("payment_status")
     var paymentStatus: Int? = null,
 
     // 支払い期限
-    @PropertyName("payment_deadline")
     var paymentDeadline: Date? = null
 ) {
     companion object {

@@ -5,26 +5,19 @@ import com.google.firebase.firestore.PropertyName
 
 data class FirebaseBankAccountEntity(
     // 銀行コード／名称
-    @PropertyName("bank_code")
     val bankCode: String? = "",
-    @PropertyName("bank_name")
     val bankName: String? = "",
 
     // 支店コード／名称
-    @PropertyName("branch_code")
     val branchCode: String? = "",
-    @PropertyName("branch_name")
     val branchName: String? = "",
 
     // 口座種別
-    @PropertyName("account_type")
     val accountType: Int? = null,
 
-    @PropertyName("holder_name")
     // 口座名義
     val holderName: String? = "",
 
-    @PropertyName("account_number")
     // 口座番号
     val accountNumber: String? = ""
 ) {

@@ -35,6 +35,10 @@ class CircuitRepositoryImpl @Inject constructor(val database: AppDatabase) : Cir
         return circuitList
     }
 
+    override suspend fun getHasRecord(): List<Circuit> {
+        return listOf()
+    }
+
     override suspend fun create(circuit: Circuit): Circuit? {
         val entity =
             CircuitEntity(id = 0, name = circuit.name, kana = circuit.kana, url = circuit.url)
