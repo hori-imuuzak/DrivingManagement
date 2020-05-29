@@ -23,6 +23,13 @@
     <string name="weather_storm">豪雨</string>
     <string name="weather_snow">雪</string>
 
+    <string name="weather_label">天気</string>
+    <string name="min_temperature_label">最低気温</string>
+    <string name="max_temperature_label">最高気温</string>
+    <string name="pressure_label">気圧</string>
+    <string name="humidity_label">湿度</string>
+    <string name="wind_label">風速/向き</string>
+
     <string name="format_temperature">%1$s℃</string>
 
     <string name="create_track_event">走行会イベントの作成</string>

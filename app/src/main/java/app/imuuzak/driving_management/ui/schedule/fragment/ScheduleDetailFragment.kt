@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import app.imuuzak.driving_management.DrivingManagementApp
@@ -39,6 +41,7 @@ class ScheduleDetailFragment @Inject constructor(): Fragment() {
 
         setupUI(binding)
         bind(binding)
+        observe(binding)
 
         return binding.root
     }
@@ -52,7 +55,7 @@ class ScheduleDetailFragment @Inject constructor(): Fragment() {
         (childFragmentManager.findFragmentById(R.id.mapFragment) as? SupportMapFragment)?.let {
             it.getMapAsync { map ->
                 val place = LatLng(35.301318, 139.480219)
-                map.moveCamera(CameraUpdateFactory.newLatLng(place))
+                map.moveCamera(CameraUpdateFactory.newLatLngZoom(place, 13.0f))
             }
         }
     }
@@ -60,5 +63,20 @@ class ScheduleDetailFragment @Inject constructor(): Fragment() {
     private fun bind(binding: FragmentScheduleDetailBinding) {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = this.viewModel
+    }
+
+    private fun observe(binding: FragmentScheduleDetailBinding) {
+        viewModel.belongingTextList.observe(viewLifecycleOwner, Observer {
+            it.forEach { belongingName ->
+                belongingName?.let { name ->
+                    val textView = TextView(context).apply {
+                        text = name
+                        val paddingTop = resources.getDimensionPixelSize(R.dimen.medium)
+                        setPadding(0, paddingTop, 0, 0)
+                    }
+                    binding.belongingsContainerView.addView(textView)
+                }
+            }
+        })
     }
 }

@@ -22,39 +22,33 @@ class ScheduleDetailViewModel @Inject constructor(val app: Application) : Androi
     }
 
     val circuitName = Transformations.map(_trackEvent) { it.circuit?.name ?: "" }
-
     val organizerName = Transformations.map(_trackEvent) { it.organizer?.name ?: "" }
-
     val scheduleDateText = Transformations.map(_trackEvent) {
         it.date?.beginText()
     }
-
     val scheduleTimeText = Transformations.map(_trackEvent) {
-        it.scheduleTimeText() ?: ""
+        it.scheduleTimeText()
     }
-
+    val belongingTextList = Transformations.map(_trackEvent) {
+        it.belongings.map { belonging -> belonging.name }
+    }
     val precautionText = Transformations.map(_trackEvent) {
         it.precautions ?: ""
     }
-
     val priceText = Transformations.map(_trackEvent) {
         it.priceText()
     }
-
     val paymentMethodText = Transformations.map(_trackEvent) {
         it.paymentMethod?.textResId()?.let { resId ->
             app.getString(resId)
         } ?: ""
     }
-
     val isExpired = Transformations.map(_trackEvent) {
         it.paymentStatus == PaymentStatus.YET && it.paymentDeadline != null && it.paymentDeadline?.begin?.before(
             Date()
         ) == true
     }
-
     val checkedPaymentStatus = MutableLiveData<Int>()
-
     val deadlineText = Transformations.map(_trackEvent) {
         app.getString(R.string.text_limit, it.paymentDeadline?.beginText())
     }

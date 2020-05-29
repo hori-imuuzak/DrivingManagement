@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -98,10 +99,20 @@
                         android:text="@{viewModel.scheduleTimeText}"
                         tools:text="05:00 ~ 15:00" />
 
-                    <androidx.recyclerview.widget.RecyclerView
+                    <LinearLayout
+                        android:id="@+id/belongings_container_view"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/medium" />
+                        android:layout_marginTop="@dimen/medium"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/small"
+                            android:text="@string/belongings" />
+
+                    </LinearLayout>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -114,16 +125,174 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingHorizontal="@dimen/medium"
                     android:layout_marginTop="@dimen/large"
+                    android:paddingHorizontal="@dimen/medium"
                     android:text="@string/weather_news"
                     android:textSize="@dimen/h2" />
 
-                <ImageView
+                <androidx.gridlayout.widget.GridLayout
                     android:layout_width="match_parent"
-                    android:layout_height="160dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/medium"
-                    android:src="@android:drawable/screen_background_dark" />
+                    android:background="@drawable/weather_background_gradient"
+                    app:columnCount="2"
+                    app:rowCount="2">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/medium"
+                        android:background="@drawable/weather_panel_background"
+                        android:orientation="vertical"
+                        android:padding="@dimen/medium"
+                        app:layout_columnWeight="1"
+                        app:layout_gravity="fill"
+                        app:layout_rowWeight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/weather_label"
+                            android:textColor="@android:color/white" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:padding="@dimen/medium"
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/h3"
+                            android:textStyle="bold"
+                            tools:text="晴れ" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/medium"
+                        android:background="@drawable/weather_panel_background"
+                        android:orientation="vertical"
+                        android:padding="@dimen/medium"
+                        app:layout_columnWeight="1"
+                        app:layout_gravity="fill"
+                        app:layout_rowWeight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/min_temperature_label"
+                            android:textColor="@android:color/white" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:padding="@dimen/medium"
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/h3"
+                            android:textStyle="bold"
+                            tools:text="13.2℃" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/max_temperature_label"
+                            android:textColor="@android:color/white" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:padding="@dimen/medium"
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/h3"
+                            android:textStyle="bold"
+                            tools:text="26.1℃" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/medium"
+                        android:background="@drawable/weather_panel_background"
+                        android:orientation="vertical"
+                        android:padding="@dimen/medium"
+                        app:layout_columnWeight="1"
+                        app:layout_gravity="fill"
+                        app:layout_rowWeight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/wind_label"
+                            android:textColor="@android:color/white" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:padding="@dimen/medium"
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/h3"
+                            android:textStyle="bold"
+                            tools:text="4m/s" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:padding="@dimen/medium"
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/h3"
+                            android:textStyle="bold"
+                            tools:text="北西" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/medium"
+                        android:background="@drawable/weather_panel_background"
+                        android:orientation="vertical"
+                        android:padding="@dimen/medium"
+                        app:layout_columnWeight="1"
+                        app:layout_gravity="fill"
+                        app:layout_rowWeight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/pressure_label"
+                            android:textColor="@android:color/white" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:padding="@dimen/medium"
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/h3"
+                            android:textStyle="bold"
+                            tools:text="1030hPa" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/humidity_label"
+                            android:textColor="@android:color/white" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:padding="@dimen/medium"
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/h3"
+                            android:textStyle="bold"
+                            tools:text="50%" />
+                    </LinearLayout>
+                </androidx.gridlayout.widget.GridLayout>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -150,8 +319,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:layout_marginTop="@dimen/large"
+                    android:orientation="vertical"
                     android:paddingHorizontal="@dimen/medium">
 
                     <TextView
