@@ -31,9 +31,6 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
-        <activity
             android:name=".ui.home.activity.HomeActivity"
             android:label="@string/title_activity_home" />
         <activity
@@ -49,6 +46,9 @@
             android:name=".ui.organizer.activity.CreateOrganizerActivity"
             android:label="@string/add_organizer"
             android:parentActivityName=".ui.schedule.activity.CreateTrackEventActivity" />
+        <activity
+            android:name=".ui.record.activity.CreateRecordActivity"
+            android:label="@string/create_record" />
         <activity
             android:name=".ui.splash.activity.SplashActivity"
             android:theme="@style/FullScreen">

@@ -9,6 +9,8 @@
     <string name="title_schedule_detail">走行スケジュール確認</string>
 
     <string name="schedule_date">開催日時</string>
+    <string name="date">日にち</string>
+    <string name="pick_date">カレンダーから選択する</string>
     <string name="place">場所</string>
     <string name="has_precautions">注意事項の記載あり</string>
     <string name="application_info">申込状況</string>
@@ -33,9 +35,8 @@
     <string name="format_temperature">%1$s℃</string>
 
     <string name="create_track_event">走行会イベントの作成</string>
-    <string name="create_record">レコードの作成</string>
-
     <string name="holding_circuit">開催サーキット</string>
+    <string name="circuit">サーキット</string>
     <string name="add_circuit">サーキットを新しく追加する</string>
     <string name="hint_circuit_name">富士スピードウェイ</string>
     <string name="hint_circuit_kana">フジスピードウェイ</string>
@@ -56,6 +57,16 @@
     <string name="account_type_current">当座</string>
     <string name="hint_organizer_payee_bank_holder">ドライビングチーム</string>
     <string name="hint_organizer_payee_account_number">01231234</string>
+
+    <string name="create_record">レコードの作成</string>
+    <string name="lap_time_list">ラップタイムリスト</string>
+    <string name="add_lap_time">タイムを追加する</string>
+    <string name="title_add_lap_time">ラップタイムを追加</string>
+    <string name="desc_add_lap_time">分:秒.秒未満単位の設定ができます</string>
+    <string name="memo">メモ</string>
+    <string name="hint_record_memo">反省点や、次回の課題、当日感じたことなどをメモしてみましょう</string>
+    <string name="photo">フォト</string>
+    <string name="hint_record_photo">リザルトの写真や、当日の写真などを、記録と一緒に残してみましょう</string>
 
     <string name="payment_method_card">クレジットカード</string>
     <string name="payment_method_bank">銀行振込</string>
@@ -103,6 +114,8 @@
     <string name="payee_bank_account_number">口座番号</string>
 
     <string name="text_limit">%1$sまで</string>
+
+    <string name="add">追加する</string>
 
     <string name="success_create">作成しました。</string>
     <string name="error_create">作成に失敗しました。時間をおいて再度お試しください。</string>

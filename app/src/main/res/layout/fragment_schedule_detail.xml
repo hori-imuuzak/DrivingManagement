@@ -10,6 +10,10 @@
         <variable
             name="viewModel"
             type="app.imuuzak.driving_management.ui.schedule.viewmodel.ScheduleDetailViewModel" />
+
+        <variable
+            name="uiEvent"
+            type="app.imuuzak.driving_management.ui.schedule.fragment.ScheduleDetailFragment.UIEvent" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -395,6 +399,7 @@
             android:clickable="true"
             android:focusable="true"
             android:src="@mipmap/checker"
+            android:onClick="@{() -> uiEvent.onClickFloatingActionButton()}"
             android:tooltipText="@string/create_record" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

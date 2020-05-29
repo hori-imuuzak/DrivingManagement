@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="app.imuuzak.driving_management.ui.record.viewmodel.LapTimePickerDialogViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/large">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_add_lap_time"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/desc_add_lap_time"
+            android:textSize="@dimen/caption"
+            android:layout_marginTop="@dimen/small"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/medium"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <NumberPicker
+                maxValue="@{59}"
+                minValue="@{0}"
+                onChange="@{(picker, oldValue, newValue) -> viewModel.setMinutes(newValue)}"
+                value="@{viewModel.minutes}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/small"
+                android:text=":"
+                android:textSize="@dimen/h1" />
+
+            <NumberPicker
+                maxValue="@{59}"
+                minValue="@{0}"
+                onChange="@{(picker, oldValue, newValue) -> viewModel.setSeconds(newValue)}"
+                value="@{viewModel.seconds}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/small"
+                android:text="."
+                android:textSize="@dimen/h1" />
+
+            <NumberPicker
+                maxValue="@{9}"
+                minValue="@{0}"
+                onChange="@{(picker, oldValue, newValue) -> viewModel.setMillSec(newValue)}"
+                value="@{viewModel.millSec}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <NumberPicker
+                maxValue="@{9}"
+                minValue="@{0}"
+                onChange="@{(picker, oldValue, newValue) -> viewModel.setMicroSec(newValue)}"
+                value="@{viewModel.microSec}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <NumberPicker
+                maxValue="@{9}"
+                minValue="@{0}"
+                onChange="@{(picker, oldValue, newValue) -> viewModel.setNanoSec(newValue)}"
+                value="@{viewModel.nanoSec}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/medium"
+            android:gravity="end">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:enabled="@{viewModel.canAddLapTime}"
+                android:onClick="@{() -> viewModel.addRecord()}"
+                android:text="@string/add" />
+        </LinearLayout>
+    </LinearLayout>
+</layout>

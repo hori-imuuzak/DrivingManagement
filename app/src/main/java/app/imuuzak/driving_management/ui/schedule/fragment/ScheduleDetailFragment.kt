@@ -1,5 +1,6 @@
 package app.imuuzak.driving_management.ui.schedule.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import app.imuuzak.driving_management.DrivingManagementApp
 import app.imuuzak.driving_management.R
 import app.imuuzak.driving_management.databinding.FragmentScheduleDetailBinding
 import app.imuuzak.driving_management.di.ViewModelFactory
+import app.imuuzak.driving_management.ui.record.activity.CreateRecordActivity
 import app.imuuzak.driving_management.ui.schedule.viewmodel.ScheduleDetailViewModel
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
@@ -58,6 +60,14 @@ class ScheduleDetailFragment @Inject constructor(): Fragment() {
                 map.moveCamera(CameraUpdateFactory.newLatLngZoom(place, 13.0f))
             }
         }
+
+        binding.uiEvent = object: UIEvent {
+            override fun onClickFloatingActionButton() {
+                val intent =
+                    Intent(activity, CreateRecordActivity::class.java)
+                startActivity(intent)
+            }
+        }
     }
 
     private fun bind(binding: FragmentScheduleDetailBinding) {
@@ -78,5 +88,9 @@ class ScheduleDetailFragment @Inject constructor(): Fragment() {
                 }
             }
         })
+    }
+
+    interface UIEvent {
+        fun onClickFloatingActionButton()
     }
 }

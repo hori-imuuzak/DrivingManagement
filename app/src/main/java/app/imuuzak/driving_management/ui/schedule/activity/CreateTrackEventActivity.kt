@@ -77,9 +77,7 @@ class CreateTrackEventActivity : AppCompatActivity() {
             }
 
             override fun onClickCreateBelonging() {
-                val count = viewModel.addBelonging(Belonging("", 1))
-                // 末尾追加なのでcountをpositionに指定する
-                // belongingsListAdapter.notifyItemInserted(count)
+                viewModel.addBelonging(Belonging("", 1))
             }
 
             override fun onClickMeetingDate() {
