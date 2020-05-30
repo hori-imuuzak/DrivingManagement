@@ -9,7 +9,7 @@
         android:id="@+id/navigation_schedule"
         android:name="app.imuuzak.driving_management.ui.home.fragment.ScheduleFragment"
         android:label="@string/title_schedule"
-        tools:layout="@layout/fragment_schedule" >
+        tools:layout="@layout/fragment_schedule">
         <action
             android:id="@+id/action_navigation_schedule_to_scheduleDetailFragment"
             app:destination="@id/scheduleDetailFragment" />
@@ -19,7 +19,11 @@
         android:id="@+id/navigation_record"
         android:name="app.imuuzak.driving_management.ui.home.fragment.RecordFragment"
         android:label="@string/title_record"
-        tools:layout="@layout/fragment_record" />
+        tools:layout="@layout/fragment_record">
+        <action
+            android:id="@+id/action_navigation_record_to_recordListFragment"
+            app:destination="@id/recordListFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_car_management"
@@ -37,9 +41,14 @@
         android:id="@+id/scheduleDetailFragment"
         android:name="app.imuuzak.driving_management.ui.schedule.fragment.ScheduleDetailFragment"
         android:label="@string/title_schedule_detail"
-        tools:layout="@layout/fragment_schedule_detail" >
+        tools:layout="@layout/fragment_schedule_detail">
         <argument
             android:name="trackEvent"
             app:argType="app.imuuzak.driving_management.domain.model.TrackEvent" />
     </fragment>
+    <fragment
+        android:id="@+id/recordListFragment"
+        android:name="app.imuuzak.driving_management.ui.record.fragment.RecordListFragment"
+        android:label="@string/record_list"
+        tools:layout="@layout/fragment_record_list" />
 </navigation>

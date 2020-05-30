@@ -20,6 +20,7 @@
         android:layout_marginTop="@dimen/small"
         android:clickable="true"
         android:elevation="@dimen/medium"
+        android:onClick="@{() -> viewModel.setSelectCircuit(viewModel.circuitList[position])}"
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground">
 
@@ -37,7 +38,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/large"
+                android:padding="@dimen/medium"
                 android:text="@{viewModel.circuitNameList[position]}"
                 tools:text="筑波サーキット" />
         </LinearLayout>

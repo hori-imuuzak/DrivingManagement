@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import app.imuuzak.driving_management.DrivingManagementApp
 import app.imuuzak.driving_management.R
 import app.imuuzak.driving_management.databinding.FragmentRecordBinding
@@ -36,7 +37,12 @@ class RecordFragment : Fragment() {
         recordViewModel =
             ViewModelProvider(this, viewModelFactory).get(RecordViewModel::class.java)
 
-        val binding = DataBindingUtil.inflate<FragmentRecordBinding>(inflater, R.layout.fragment_record, container, false)
+        val binding = DataBindingUtil.inflate<FragmentRecordBinding>(
+            inflater,
+            R.layout.fragment_record,
+            container,
+            false
+        )
 
         setupUI(binding)
         bind(binding)
@@ -53,7 +59,7 @@ class RecordFragment : Fragment() {
     }
 
     private fun bind(binding: FragmentRecordBinding) {
-        binding.uiEvent = object: UIEvent {
+        binding.uiEvent = object : UIEvent {
             override fun onClickFloatingActionButton() {
                 val intent =
                     Intent(activity, CreateRecordActivity::class.java)
@@ -66,6 +72,18 @@ class RecordFragment : Fragment() {
         recordViewModel.circuitList.observe(viewLifecycleOwner, Observer {
             circuitListAdapter.notifyDataSetChanged()
         })
+
+        recordViewModel.selectCircuit.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                findNavController().navigate(RecordFragmentDirections.actionNavigationRecordToRecordListFragment())
+            }
+        })
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        recordViewModel.setSelectCircuit(null)
     }
 
     interface UIEvent {
