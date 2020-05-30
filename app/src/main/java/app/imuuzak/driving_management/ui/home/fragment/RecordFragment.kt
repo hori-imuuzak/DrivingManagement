@@ -75,7 +75,7 @@ class RecordFragment : Fragment() {
 
         recordViewModel.selectCircuit.observe(viewLifecycleOwner, Observer {
             it?.let {
-                findNavController().navigate(RecordFragmentDirections.actionNavigationRecordToRecordListFragment())
+                findNavController().navigate(RecordFragmentDirections.actionNavigationRecordToRecordListFragment(it))
             }
         })
     }

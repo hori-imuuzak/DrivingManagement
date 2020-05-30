@@ -60,6 +60,7 @@
 
     <string name="create_record">レコードの作成</string>
     <string name="record_list">レコード一覧</string>
+    <string name="select_in_has_record_circuit">記録のあるサーキットから選択</string>
     <string name="lap_time_list">ラップタイムリスト</string>
     <string name="add_lap_time">タイムを追加する</string>
     <string name="title_add_lap_time">ラップタイムを追加</string>

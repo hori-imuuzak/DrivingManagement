@@ -50,5 +50,9 @@
         android:id="@+id/recordListFragment"
         android:name="app.imuuzak.driving_management.ui.record.fragment.RecordListFragment"
         android:label="@string/record_list"
-        tools:layout="@layout/fragment_record_list" />
+        tools:layout="@layout/fragment_record_list" >
+        <argument
+            android:name="circuit"
+            app:argType="app.imuuzak.driving_management.domain.model.Circuit" />
+    </fragment>
 </navigation>
