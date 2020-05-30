@@ -7,29 +7,49 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import app.imuuzak.driving_management.DrivingManagementApp
 import app.imuuzak.driving_management.R
 import app.imuuzak.driving_management.databinding.FragmentRecordBinding
+import app.imuuzak.driving_management.di.ViewModelFactory
+import app.imuuzak.driving_management.ui.home.adapter.RecordCircuitListAdapter
 import app.imuuzak.driving_management.ui.home.viewmodel.RecordViewModel
 import app.imuuzak.driving_management.ui.record.activity.CreateRecordActivity
+import javax.inject.Inject
 
 class RecordFragment : Fragment() {
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
     private lateinit var recordViewModel: RecordViewModel
+    private lateinit var circuitListAdapter: RecordCircuitListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        (activity?.application as DrivingManagementApp).getComponent().inject(this)
+
         recordViewModel =
-            ViewModelProvider(this).get(RecordViewModel::class.java)
+            ViewModelProvider(this, viewModelFactory).get(RecordViewModel::class.java)
 
         val binding = DataBindingUtil.inflate<FragmentRecordBinding>(inflater, R.layout.fragment_record, container, false)
 
+        setupUI(binding)
         bind(binding)
+        observe()
+
+        recordViewModel.loadHasRecordCircuitList()
 
         return binding.root
+    }
+
+    private fun setupUI(binding: FragmentRecordBinding) {
+        circuitListAdapter = RecordCircuitListAdapter(viewLifecycleOwner, recordViewModel)
+        binding.circuitList.adapter = circuitListAdapter
     }
 
     private fun bind(binding: FragmentRecordBinding) {
@@ -40,6 +60,12 @@ class RecordFragment : Fragment() {
                 startActivity(intent)
             }
         }
+    }
+
+    private fun observe() {
+        recordViewModel.circuitList.observe(viewLifecycleOwner, Observer {
+            circuitListAdapter.notifyDataSetChanged()
+        })
     }
 
     interface UIEvent {

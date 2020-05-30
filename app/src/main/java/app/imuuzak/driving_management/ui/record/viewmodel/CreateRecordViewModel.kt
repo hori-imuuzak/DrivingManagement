@@ -93,10 +93,10 @@ class CreateRecordViewModel @Inject constructor(
 
         resource.value = ResourceState.loading()
         viewModelScope.launch {
-            if (_selectedCircuit.value != null && _recordTimeList.value != null) {
+            if (_date.value != null && _selectedCircuit.value != null && _recordTimeList.value != null) {
                 val record = Record(
                     circuit = _selectedCircuit.value!!,
-                    date = Date(),
+                    date = _date.value!!,
                     recordList = _recordTimeList.value!!,
                     memo = memo.value ?: "",
                     pictureUrlList = listOf()

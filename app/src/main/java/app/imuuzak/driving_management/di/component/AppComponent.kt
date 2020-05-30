@@ -2,6 +2,7 @@ package app.imuuzak.driving_management.di.component
 
 import app.imuuzak.driving_management.di.module.*
 import app.imuuzak.driving_management.ui.circuit.activity.CreateCircuitActivity
+import app.imuuzak.driving_management.ui.home.fragment.RecordFragment
 import app.imuuzak.driving_management.ui.home.fragment.ScheduleFragment
 import app.imuuzak.driving_management.ui.organizer.activity.CreateOrganizerActivity
 import app.imuuzak.driving_management.ui.record.activity.CreateRecordActivity
@@ -10,6 +11,8 @@ import app.imuuzak.driving_management.ui.schedule.fragment.ScheduleDetailFragmen
 import dagger.Component
 import javax.inject.Singleton
 
+// TODO Componentを分割する
+
 @Singleton
 @Component(
     modules = [
@@ -17,6 +20,7 @@ import javax.inject.Singleton
         ViewModelFactoryModule::class,
         ScheduleViewModelModule::class,
         ScheduleDetailViewModelModule::class,
+        RecordViewModelModule::class,
         CreateTrackEventViewModelModule::class,
         CreateCircuitViewModelModule::class,
         CreateOrganizerViewModelModule::class,
@@ -37,6 +41,7 @@ interface AppComponent {
 
     fun inject(fragment: ScheduleFragment)
     fun inject(fragment: ScheduleDetailFragment)
+    fun inject(fragment: RecordFragment)
     fun inject(activity: CreateTrackEventActivity)
     fun inject(activity: CreateCircuitActivity)
     fun inject(activity: CreateOrganizerActivity)

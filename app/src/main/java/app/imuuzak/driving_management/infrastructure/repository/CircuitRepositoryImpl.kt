@@ -5,6 +5,8 @@ import app.imuuzak.driving_management.domain.repository.CircuitRepository
 import app.imuuzak.driving_management.infrastructure.database.AppDatabase
 import app.imuuzak.driving_management.infrastructure.database.entity.CircuitEntity
 import app.imuuzak.driving_management.infrastructure.repository.entity.FirebaseCircuitEntity
+import app.imuuzak.driving_management.infrastructure.repository.entity.FirebaseRecordEntity
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
@@ -36,7 +38,51 @@ class CircuitRepositoryImpl @Inject constructor(val database: AppDatabase) : Cir
     }
 
     override suspend fun getHasRecord(): List<Circuit> {
-        return listOf()
+        val circuitList = mutableListOf<Circuit>()
+
+        val auth = FirebaseAuth.getInstance()
+        val user = auth.currentUser
+
+        user?.let {
+            // レコードをもつサーキット名のリストを取得
+            val hasRecordCircuitNameListSnapshot = FirebaseRecordEntity
+                .hasCircuitList(it.uid)
+                .get()
+                .await()
+
+            val circuitNameList = hasRecordCircuitNameListSnapshot.documents.map { doc ->
+                doc.data?.get("name") as String
+            }
+
+            // RemoteDataのサーキットを取得
+            val remoteCircuitListSnapshot = FirebaseCircuitEntity
+                .collections()
+                .whereIn("name", circuitNameList)
+                .get()
+                .await()
+
+            // LocalDataのサーキットを取得
+            val localCircuitList = database.circuitDao().findInNameList(circuitNameList)
+
+            // RemoteData/LocalDataをそれぞれCircuitとしてリスト化
+            circuitList.addAll(remoteCircuitListSnapshot.documents.map { doc ->
+                val data = doc.data
+                Circuit(
+                    name = data?.get("name") as? String ?: "",
+                    kana = data?.get("kana") as? String ?: "",
+                    url = data?.get("url") as? String ?: ""
+                )
+            })
+            circuitList.addAll(localCircuitList.map { entity ->
+                Circuit(
+                    name = entity.name,
+                    kana = entity.kana,
+                    url = entity.url
+                )
+            })
+        }
+
+        return circuitList
     }
 
     override suspend fun create(circuit: Circuit): Circuit? {

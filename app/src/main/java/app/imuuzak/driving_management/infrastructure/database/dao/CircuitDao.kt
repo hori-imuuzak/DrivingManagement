@@ -13,6 +13,9 @@ interface CircuitDao {
     @Query("SELECT * FROM circuits WHERE name = :name")
     suspend fun findByName(name: String): List<CircuitEntity>
 
+    @Query("SELECT * FROM circuits WHERE name IN (:nameList)")
+    suspend fun findInNameList(nameList: List<String>): List<CircuitEntity>
+
     @Insert
     suspend fun create(circuit: CircuitEntity)
 }

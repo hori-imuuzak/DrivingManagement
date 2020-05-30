@@ -25,6 +25,16 @@ class FirebaseRecordEntity(
                 .collection("records")
         }
 
+        fun hasCircuitList(uid: String): CollectionReference {
+            return FirebaseFirestore
+                .getInstance()
+                .collection("users")
+                .document(uid)
+                .collection("records")
+                .document("circuit")
+                .collection("has_record")
+        }
+
         fun from(record: Record): FirebaseRecordEntity {
             return FirebaseRecordEntity(
                 circuit = FirebaseCircuitEntity.from(record.circuit),
