@@ -17,4 +17,47 @@ data class RecordTime(
 
         return str
     }
+
+    companion object {
+        fun fromString(value: String): RecordTime {
+            val s1 = value.split(".")
+            if (s1.size != 2) throw IllegalArgumentException("invalid format recordTime")
+
+            var seconds = 0
+            if (s1[0].indexOf(":") < 0) {
+                // 秒数のみであれば数字変換できるかどうか
+                seconds = s1[0].toIntOrNull() ?: throw IllegalArgumentException("invalid format recordTime seconds")
+            } else {
+                val s2 = s1[0].split(":")
+                when (s2.size) {
+                    2 -> {
+                        // 分:秒
+                        val m = s2[0].toIntOrNull()
+                        val s = s2[1].toIntOrNull()
+                        if (m == null || s == null) throw IllegalArgumentException("invalid format recordTime seconds")
+                        seconds = m * 60 + s
+                    }
+                    3 -> {
+                        // 時:分:秒
+                        val h = s2[0].toIntOrNull()
+                        val m = s2[1].toIntOrNull()
+                        val s = s2[2].toIntOrNull()
+                        if (h == null || m == null || s == null) throw IllegalArgumentException("invalid format recordTime seconds")
+                        seconds = h * 3600 + m * 60 + s
+                    }
+                    else -> {
+                        throw IllegalArgumentException("invalid format recordTime seconds")
+                    }
+                }
+            }
+
+            val decimal = s1[1].toIntOrNull()
+                ?: throw IllegalArgumentException("invalid format recordTime decimal")
+
+            return RecordTime(
+                seconds = seconds,
+                decimal = decimal
+            )
+        }
+    }
 }

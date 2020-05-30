@@ -2,10 +2,13 @@ package app.imuuzak.driving_management.infrastructure.repository
 
 import app.imuuzak.driving_management.domain.model.Circuit
 import app.imuuzak.driving_management.domain.model.Record
+import app.imuuzak.driving_management.domain.model.value.RecordTime
 import app.imuuzak.driving_management.domain.repository.RecordRepository
 import app.imuuzak.driving_management.infrastructure.repository.entity.FirebaseCircuitEntity
 import app.imuuzak.driving_management.infrastructure.repository.entity.FirebaseRecordEntity
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.Query
 import kotlinx.coroutines.tasks.await
 import java.util.*
 
@@ -20,14 +23,15 @@ class RecordRepositoryImpl : RecordRepository {
             val snapshot = FirebaseRecordEntity
                 .collections(it.uid)
                 .whereEqualTo("circuit.name", circuit.name)
+                .orderBy("date", Query.Direction.DESCENDING)
                 .get()
                 .await()
 
             result.addAll(snapshot.documents.map { doc ->
                 Record(
                     circuit = circuit,
-                    date = doc["date"] as Date,
-                    recordList = listOf(),
+                    date = (doc["date"] as Timestamp).toDate(),
+                    recordList = (doc["recordList"] as ArrayList<*>).map { recordTime -> RecordTime.fromString(recordTime as String) }.toList(),
                     memo = doc["memo"] as String,
                     pictureUrlList = listOf()
                 )
