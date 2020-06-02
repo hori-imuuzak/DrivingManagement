@@ -18,6 +18,10 @@ data class RecordTime(
         return str
     }
 
+    fun seconds(): Double {
+        return format().toDoubleOrNull() ?: 0.0
+    }
+
     companion object {
         fun fromString(value: String): RecordTime {
             val s1 = value.split(".")

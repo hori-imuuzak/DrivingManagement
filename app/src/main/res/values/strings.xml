@@ -69,6 +69,9 @@
     <string name="hint_record_memo">反省点や、次回の課題、当日感じたことなどをメモしてみましょう</string>
     <string name="photo">フォト</string>
     <string name="hint_record_photo">リザルトの写真や、当日の写真などを、記録と一緒に残してみましょう</string>
+    <string name="record_count">記録数：%1$d</string>
+    <string name="fastest_laptime">最速タイム：%1$s</string>
+    <string name="memo_text">メモ：%1$s</string>
 
     <string name="payment_method_card">クレジットカード</string>
     <string name="payment_method_bank">銀行振込</string>

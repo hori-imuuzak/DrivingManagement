@@ -2,9 +2,22 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="recordListViewModel"
+            type="app.imuuzak.driving_management.ui.record.viewmodel.RecordListViewModel" />
+
+        <variable
+            name="position"
+            type="Integer" />
+    </data>
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
         android:elevation="@dimen/medium">
 
         <LinearLayout
@@ -16,7 +29,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2020/05/05"
+                android:text="@{recordListViewModel.dateText[position]}"
                 tools:text="2020/05/05" />
 
             <TextView
@@ -24,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/small"
                 android:textSize="@dimen/caption"
-                android:text="記録数：10"
+                android:text="@{recordListViewModel.recordCountText[position]}"
                 tools:text="記録数：10" />
 
             <TextView
@@ -32,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/small"
                 android:textSize="@dimen/caption"
-                android:text="最速：01:24.381"
+                android:text="@{recordListViewModel.fastestTimeText[position]}"
                 tools:text="最速：01:24.381" />
 
             <TextView
@@ -42,7 +55,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:textSize="@dimen/caption"
-                android:text="メモ：長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト"
+                android:text="@{recordListViewModel.memoText[position]}"
                 tools:text="メモ：長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>

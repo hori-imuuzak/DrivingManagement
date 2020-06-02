@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.DividerItemDecoration
 import app.imuuzak.driving_management.DrivingManagementApp
 import app.imuuzak.driving_management.R
 import app.imuuzak.driving_management.databinding.FragmentRecordListBinding
@@ -51,8 +52,9 @@ class RecordListFragment : Fragment() {
     }
 
     private fun setupUI(binding: FragmentRecordListBinding) {
-        recordListAdapter = RecordListAdapter()
+        recordListAdapter = RecordListAdapter(viewLifecycleOwner, recordListViewModel)
         binding.recordList.adapter = recordListAdapter
+        binding.recordList.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
     }
 
     private fun observe() {
