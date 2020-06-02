@@ -2,15 +2,24 @@ package app.imuuzak.driving_management.ui.record.fragment
 
 import android.os.Bundle
 import android.view.*
+import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.core.view.marginTop
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.NavigationUI
 import app.imuuzak.driving_management.R
 import app.imuuzak.driving_management.databinding.FragmentRecordDetailBinding
+import app.imuuzak.driving_management.databinding.RecordDetailLaptimeRowBinding
+import app.imuuzak.driving_management.domain.model.Record
+import app.imuuzak.driving_management.ui.record.viewmodel.RecordDetailViewModel
 
 class RecordDetailFragment : Fragment() {
+
+    lateinit var viewModel: RecordDetailViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,13 +36,35 @@ class RecordDetailFragment : Fragment() {
         )
 
         val record = navArgs<RecordDetailFragmentArgs>().value.record
+        viewModel = ViewModelProvider(this).get(RecordDetailViewModel::class.java)
+        viewModel.setRecord(record)
 
-        setupUI(binding)
+        setupUI(binding, record)
+        bind(binding)
 
         return binding.root
     }
 
-    private fun setupUI(binding: FragmentRecordDetailBinding) {
+    private fun setupUI(binding: FragmentRecordDetailBinding, record: Record) {
+        record.recordList.map {
+            val recordDetailLapTimeListRowBinding =
+                DataBindingUtil.inflate<RecordDetailLaptimeRowBinding>(
+                    LayoutInflater.from(context),
+                    R.layout.record_detail_laptime_row,
+                    binding.lapTimeContainer,
+                    false
+                )
+
+            recordDetailLapTimeListRowBinding.text = it.format()
+
+            binding.lapTimeContainer.addView(recordDetailLapTimeListRowBinding.root)
+        }
+    }
+
+    private fun bind(binding: FragmentRecordDetailBinding) {
+        binding.lifecycleOwner = viewLifecycleOwner
+
+        binding.recordDetailViewModel = viewModel
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
