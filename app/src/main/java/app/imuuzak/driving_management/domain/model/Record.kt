@@ -1,6 +1,7 @@
 package app.imuuzak.driving_management.domain.model
 
 import app.imuuzak.driving_management.domain.model.value.RecordTime
+import java.io.Serializable
 import java.util.*
 
 /**
@@ -12,7 +13,7 @@ data class Record(
     val recordList: List<RecordTime>,
     val memo: String = "",
     val pictureUrlList: List<String> = listOf()
-) {
+) : Serializable {
     init {
         if (recordList.isEmpty()) {
             throw IllegalArgumentException("recordList")

@@ -23,6 +23,12 @@ class RecordListViewModel @Inject constructor(
         }
     }
 
+    private val _selectedRecord = MutableLiveData<Record?>().apply { value = null }
+    val selectedRecord: LiveData<Record?> = _selectedRecord
+    fun setSelectedRecord(record: Record?) {
+        this._selectedRecord.value = record
+    }
+
     val dateText = Transformations.map(_recordList) {
         it.map { record -> FormatService.dateFormat(record.date) }
     }

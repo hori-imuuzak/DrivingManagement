@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import app.imuuzak.driving_management.DrivingManagementApp
@@ -60,6 +61,13 @@ class RecordListFragment : Fragment() {
     private fun observe() {
         recordListViewModel.recordList.observe(viewLifecycleOwner, Observer {
             recordListAdapter.notifyDataSetChanged()
+        })
+
+        recordListViewModel.selectedRecord.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                findNavController().navigate(RecordListFragmentDirections.actionRecordListFragmentToRecordDetailFragment(it))
+                recordListViewModel.setSelectedRecord(null)
+            }
         })
     }
 }
