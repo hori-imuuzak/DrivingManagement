@@ -74,7 +74,7 @@ class CreateRecordActivity : AppCompatActivity() {
                             viewModel.addRecordTime(recordTime)
                         }
                     }
-                ).show(supportFragmentManager, "lapTimePickerDialog")
+                ).show(supportFragmentManager, LapTimePickerDialogFragment.tagName)
             }
 
             override fun onClickCreate() {

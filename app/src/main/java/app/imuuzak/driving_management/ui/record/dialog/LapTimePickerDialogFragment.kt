@@ -47,4 +47,8 @@ class LapTimePickerDialogFragment(val listener: OnRecordTimePickListener) : Dial
     interface OnRecordTimePickListener {
         fun onPicked(recordTime: RecordTime)
     }
+
+    companion object {
+        const val tagName = "lap_time_picker_dialog_fragment"
+    }
 }

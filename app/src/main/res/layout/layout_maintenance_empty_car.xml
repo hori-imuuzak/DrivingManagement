@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="app.imuuzak.driving_management.ui.home.viewmodel.MaintenanceViewModel" />
+    </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,14 +24,15 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/car_maintenance_hint"
             android:layout_marginTop="@dimen/small"
+            android:text="@string/car_maintenance_hint"
             android:textSize="@dimen/caption" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/medium"
+            android:onClick="@{() -> viewModel.onClickCreateCar()}"
             android:text="@string/add_car" />
     </LinearLayout>
 </layout>

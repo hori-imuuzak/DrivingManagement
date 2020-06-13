@@ -27,7 +27,6 @@
             android:inputType="text"
             android:maxLines="1"
             android:hint="@string/hint_belonging"
-            android:autofillHints="@string/hint_belonging"
             android:textSize="@dimen/textNormal" />
 
         <ImageView

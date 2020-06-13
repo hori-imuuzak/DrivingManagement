@@ -147,6 +147,7 @@
     <string name="car_maintenance_hint">メンテナンスは、エンジンオイルやタイヤなど、走行前に必要な車両点検などの結果を記録し、いつでも確認することができるようになる機能です。</string>
     <string name="selected_car">選択中の車両</string>
     <string name="add_car">車両を追加する</string>
+    <string name="input_car_name">車両名を入力してください</string>
     <string name="check_status">状態</string>
     <string name="last_check_odo">走行距離</string>
     <string name="last_check_date">最終確認日</string>

@@ -223,7 +223,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="140dp"
                 android:layout_marginTop="@dimen/small"
-                android:autofillHints="@string/precautions_hint"
                 android:ems="10"
                 android:gravity="start|top"
                 android:hint="@string/precautions_hint"
