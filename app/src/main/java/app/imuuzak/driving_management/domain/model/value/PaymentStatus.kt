@@ -29,10 +29,10 @@ enum class PaymentStatus {
     companion object {
         fun fromValue(value: Int): PaymentStatus {
             return when(value) {
-                PaymentStatus.YET.value() -> PaymentStatus.YET
-                PaymentStatus.DONE.value() -> PaymentStatus.DONE
-                PaymentStatus.EXPIRED.value() -> PaymentStatus.EXPIRED
-                else -> PaymentStatus.NONE
+                YET.value() -> YET
+                DONE.value() -> DONE
+                EXPIRED.value() -> EXPIRED
+                else -> NONE
             }
         }
     }

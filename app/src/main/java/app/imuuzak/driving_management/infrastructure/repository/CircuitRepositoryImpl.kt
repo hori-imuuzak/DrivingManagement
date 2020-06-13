@@ -54,32 +54,34 @@ class CircuitRepositoryImpl @Inject constructor(val database: AppDatabase) : Cir
                 doc.data?.get("name") as String
             }
 
-            // RemoteDataのサーキットを取得
-            val remoteCircuitListSnapshot = FirebaseCircuitEntity
-                .collections()
-                .whereIn("name", circuitNameList)
-                .get()
-                .await()
+            if (circuitNameList.isNotEmpty()) {
+                // RemoteDataのサーキットを取得
+                val remoteCircuitListSnapshot = FirebaseCircuitEntity
+                    .collections()
+                    .whereIn("name", circuitNameList)
+                    .get()
+                    .await()
 
-            // LocalDataのサーキットを取得
-            val localCircuitList = database.circuitDao().findInNameList(circuitNameList)
+                // LocalDataのサーキットを取得
+                val localCircuitList = database.circuitDao().findInNameList(circuitNameList)
 
-            // RemoteData/LocalDataをそれぞれCircuitとしてリスト化
-            circuitList.addAll(remoteCircuitListSnapshot.documents.map { doc ->
-                val data = doc.data
-                Circuit(
-                    name = data?.get("name") as? String ?: "",
-                    kana = data?.get("kana") as? String ?: "",
-                    url = data?.get("url") as? String ?: ""
-                )
-            })
-            circuitList.addAll(localCircuitList.map { entity ->
-                Circuit(
-                    name = entity.name,
-                    kana = entity.kana,
-                    url = entity.url
-                )
-            })
+                // RemoteData/LocalDataをそれぞれCircuitとしてリスト化
+                circuitList.addAll(remoteCircuitListSnapshot.documents.map { doc ->
+                    val data = doc.data
+                    Circuit(
+                        name = data?.get("name") as? String ?: "",
+                        kana = data?.get("kana") as? String ?: "",
+                        url = data?.get("url") as? String ?: ""
+                    )
+                })
+                circuitList.addAll(localCircuitList.map { entity ->
+                    Circuit(
+                        name = entity.name,
+                        kana = entity.kana,
+                        url = entity.url
+                    )
+                })
+            }
         }
 
         return circuitList

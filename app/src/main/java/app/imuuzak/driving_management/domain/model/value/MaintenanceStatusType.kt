@@ -18,4 +18,16 @@ enum class MaintenanceStatusType {
     };
 
     abstract fun value(): Int
+
+    companion object {
+        fun fromValue(value: Int): MaintenanceStatusType {
+            return when(value) {
+                VERY_GOOD.value() -> VERY_GOOD
+                GOOD.value() -> GOOD
+                DANGER.value() -> DANGER
+                NG.value() -> NG
+                else -> NO_CHECK
+            }
+        }
+    }
 }

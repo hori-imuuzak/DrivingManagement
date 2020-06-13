@@ -143,6 +143,8 @@
         <item>クーラント</item>
         <item>異音・異臭</item>
     </string-array>
+    <string name="car_empty">車両を追加してメンテナンスの管理をしてみましょう</string>
+    <string name="car_maintenance_hint">メンテナンスは、エンジンオイルやタイヤなど、走行前に必要な車両点検などの結果を記録し、いつでも確認することができるようになる機能です。</string>
     <string name="selected_car">選択中の車両</string>
     <string name="add_car">車両を追加する</string>
     <string name="check_status">状態</string>
