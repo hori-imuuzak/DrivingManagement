@@ -72,7 +72,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:text="@string/last_check_odd"
+                    android:text="@string/last_check_odo"
                     android:textSize="@dimen/textNormal" />
 
                 <TextView
