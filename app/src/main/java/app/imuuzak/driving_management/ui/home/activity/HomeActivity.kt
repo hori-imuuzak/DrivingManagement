@@ -28,7 +28,7 @@ class HomeActivity : AppCompatActivity() {
             setOf(
                 R.id.navigation_schedule,
                 R.id.navigation_record,
-                R.id.navigation_car_management,
+                R.id.navigation_maintenance,
                 R.id.navigation_setting
             )
         )

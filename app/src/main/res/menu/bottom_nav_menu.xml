@@ -12,7 +12,7 @@
         android:title="@string/title_record" />
 
     <item
-        android:id="@+id/navigation_car_management"
+        android:id="@+id/navigation_maintenance"
         android:icon="@mipmap/car"
         android:title="@string/title_car_management" />
 

@@ -128,4 +128,22 @@
     <string name="success_create">作成しました。</string>
     <string name="error_create">作成に失敗しました。時間をおいて再度お試しください。</string>
     <string name="title_activity_maps">Map</string>
+
+    <string-array name="maintenance">
+        <item>エンジンオイル</item>
+        <item>ミッションオイル</item>
+        <item>デフオイル</item>
+        <item>各オイル漏れ</item>
+        <item>ブレーキパッド</item>
+        <item>ブレーキローター</item>
+        <item>ブレーキフルード</item>
+        <item>タイヤ</item>
+        <item>タイヤ空気圧</item>
+        <item>ホイールナット</item>
+        <item>クーラント</item>
+        <item>異音・異臭</item>
+    </string-array>
+    <string name="check_status">状態</string>
+    <string name="last_check_odd">走行距離</string>
+    <string name="last_check_date">最終確認日</string>
 </resources>

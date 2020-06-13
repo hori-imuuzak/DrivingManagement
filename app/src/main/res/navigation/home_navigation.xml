@@ -26,10 +26,10 @@
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_car_management"
-        android:name="app.imuuzak.driving_management.ui.home.fragment.CarManagementFragment"
+        android:id="@+id/navigation_maintenance"
+        android:name="app.imuuzak.driving_management.ui.home.fragment.MaintenanceFragment"
         android:label="@string/title_car_management"
-        tools:layout="@layout/fragment_car_management" />
+        tools:layout="@layout/fragment_maintenance" />
 
     <fragment
         android:id="@+id/navigation_setting"
